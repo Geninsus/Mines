@@ -5,7 +5,12 @@
  */
 package lab4.controllers;
 
+import java.util.ArrayList;
+import javax.sound.midi.ControllerEventListener;
+import lab4.models.Cell;
 import lab4.models.Grid;
+import lab4.models.Position;
+import lab4.views.GraphicalGridView;
 import lab4.views.GridView;
 
 /**
@@ -14,14 +19,21 @@ import lab4.views.GridView;
  */
 public class GridController {
     
+    private ArrayList<ArrayList<CellController>> cellsController = new ArrayList<ArrayList<CellController>>();
     private Grid model;
-    private GridView view;
+    private GraphicalGridView view;
     private boolean firstUnveiling = true;
     
-    public GridController(Grid model, GridView view) {
+    public GridController(Grid model) {
         this.model = model;
-        this.view = view;
-        view.setController(this);
+        this.view = new GraphicalGridView(model.getWidth(), model.getHeight());
+        for (int i = 0; i < model.getHeight(); i++) {
+            this.cellsController.add(new ArrayList<CellController>());
+            for (int j = 0; j < model.getWidth(); j++) {
+                this.cellsController.get(i).add(new CellController(this,this.model.getGrid().get(j).get(i)));
+                
+            }
+        }
     }
     
     /**

@@ -5,10 +5,22 @@
  */
 package lab4.controllers;
 
+import lab4.models.Cell;
+import lab4.views.GraphicalCellView;
+
 /**
  *
  * @author fabien
  */
 public class CellController {
     
+    private GridController gridController;
+    private Cell model;
+    private GraphicalCellView view;
+    
+    public CellController(GridController gridController,Cell model){
+        this.gridController = gridController;
+        this.model = model;
+        this.view = new GraphicalCellView("toto");
+    }
 }

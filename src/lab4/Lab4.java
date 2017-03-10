@@ -12,6 +12,7 @@ import lab4.exceptions.NegativeLengthException;
 import lab4.exceptions.NegativePourcentageException;
 import lab4.exceptions.TooManyMinesException;
 import lab4.models.Grid;
+import lab4.views.GraphicalFrameView;
 import lab4.views.GridView;
 
 /**
@@ -24,6 +25,7 @@ public class Lab4 {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
+        GraphicalFrameView Frameview = new GraphicalFrameView("Démineur", 300, 300);
         Grid model = null;
         try {
             model = new Grid(12, 12, 10);
