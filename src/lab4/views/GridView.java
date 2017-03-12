@@ -52,7 +52,7 @@ public class GridView implements Observer{
     public void userInput() {
         Scanner scanner = new Scanner(System.in);
         String command = scanner.nextLine();
-        this.controller.onCommand(command);
+        //this.controller.onCommand(command);
     }
     
     /**

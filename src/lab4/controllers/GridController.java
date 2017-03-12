@@ -6,12 +6,9 @@
 package lab4.controllers;
 
 import java.util.ArrayList;
-import javax.sound.midi.ControllerEventListener;
-import lab4.models.Cell;
+import javax.swing.JFrame;
 import lab4.models.Grid;
-import lab4.models.Position;
 import lab4.views.GraphicalGridView;
-import lab4.views.GridView;
 
 /**
  *
@@ -19,14 +16,16 @@ import lab4.views.GridView;
  */
 public class GridController {
     
+    private FrameController frame;
     private ArrayList<ArrayList<CellController>> cellsController = new ArrayList<ArrayList<CellController>>();
     private Grid model;
     private GraphicalGridView view;
     private boolean firstUnveiling = true;
     
-    public GridController(Grid model) {
+    public GridController(FrameController frameController, Grid model) {
+        this.frame = frameController;
         this.model = model;
-        this.view = new GraphicalGridView(model.getWidth(), model.getHeight());
+        this.view = new GraphicalGridView(frame.view, model.getWidth(), model.getHeight());
         for (int i = 0; i < model.getHeight(); i++) {
             this.cellsController.add(new ArrayList<CellController>());
             for (int j = 0; j < model.getWidth(); j++) {
@@ -34,11 +33,24 @@ public class GridController {
                 
             }
         }
+        System.out.println("lab4.controllers.GridController.<init>()");
+        frame.view.setSize(300, 400);
+         frame.view.setSize(300,400);
+    frame.view.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    frame.view.setVisible(true);
     }
-    
+
+    /**
+     * @return the view
+     */
+    public GraphicalGridView getView() {
+        return view;
+    }
+}
     /**
      * Receive a new command from user input
      */
+    /*
     public void onCommand(String command) {
         String[] commandArr = command.split(" ");
         if(commandArr.length == 0) this.view.unknownInput();
@@ -60,13 +72,16 @@ public class GridController {
                // Statements
          }
     }
+    */
     
     /**
      * Unveiling Cell
      */
+    /*
     public void unveilingCell(String[] commandArr) {
-        
+        */
         /* Vérification des paramètres */
+    /*
         if (commandArr.length != 3) this.view.unknownInput();
         int x = Integer.parseInt(commandArr[1]);
         int y = Integer.parseInt(commandArr[2]);
@@ -87,15 +102,17 @@ public class GridController {
         model.unveilNeighbors(model.getGrid().get(y).get(x));
 
         model.updateGrid();
-    }
+    }*/
     
     /**
      * Marking Cell
      * @param commandArr 
      */
+    /*
     public void markingCell(String[] commandArr) {
-        
+        */
         /* Vérification des paramètres */
+    /*
         if (commandArr.length != 4) this.view.unknownInput();
         int x = Integer.parseInt(commandArr[1]);
         int y = Integer.parseInt(commandArr[2]);
@@ -115,3 +132,4 @@ public class GridController {
         model.updateGrid();
     }
 }
+*/

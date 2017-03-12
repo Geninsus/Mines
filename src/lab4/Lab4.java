@@ -5,15 +5,7 @@
  */
 package lab4;
 
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import lab4.controllers.GridController;
-import lab4.exceptions.NegativeLengthException;
-import lab4.exceptions.NegativePourcentageException;
-import lab4.exceptions.TooManyMinesException;
-import lab4.models.Grid;
-import lab4.views.GraphicalFrameView;
-import lab4.views.GridView;
+import lab4.controllers.FrameController;
 
 /**
  *
@@ -25,20 +17,7 @@ public class Lab4 {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        GraphicalFrameView Frameview = new GraphicalFrameView("Démineur", 300, 300);
-        Grid model = null;
-        try {
-            model = new Grid(12, 12, 10);
-        } catch (NegativeLengthException ex) {
-            Logger.getLogger(Lab4.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (NegativePourcentageException ex) {
-            Logger.getLogger(Lab4.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (TooManyMinesException ex) {
-            Logger.getLogger(Lab4.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        GridView view = new GridView(model);
-        GridController controller = new GridController(model, view);
-        model.updateGrid();
+        FrameController frame = new FrameController();
     }
     
 }
