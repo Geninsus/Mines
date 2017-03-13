@@ -32,7 +32,7 @@ public class GridView implements Observer{
         /* Afficahge de la grille */
         for(ArrayList<Cell> row : this.model.getGrid()) {
             for (Cell cell : row) {
-                System.out.print(cell.charToDisplay() + " ");
+                //System.out.print(cell.charToDisplay() + " ");
             }
             System.out.println();
         }

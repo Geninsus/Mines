@@ -7,6 +7,7 @@ package lab4.models;
 
 import java.util.ArrayList;
 import java.util.Observable;
+import java.util.Observer;
 import lab4.exceptions.NegativeLengthException;
 import lab4.exceptions.NegativePourcentageException;
 import lab4.exceptions.TooManyMinesException;
@@ -15,7 +16,7 @@ import lab4.exceptions.TooManyMinesException;
  *
  * @author fabien
  */
-public class Grid extends Observable {
+public class Grid extends Observable implements Observer{
 
     private ArrayList<ArrayList<Cell>> grid = new ArrayList<ArrayList<Cell>>();
     private int width;
@@ -68,7 +69,7 @@ public class Grid extends Observable {
             do {                
                 mine_x = (int)(Math.random() * (width));
                 mine_y = (int)(Math.random() * (height));    
-            } while (grid.get(mine_y).get(mine_x).isVisible() || grid.get(mine_y).get(mine_x).isMine());
+            } while (grid.get(mine_y).get(mine_x).isUnveil()|| grid.get(mine_y).get(mine_x).isMine());
             grid.get(mine_y).get(mine_x).setMine(true);
             if(mine_y > 0 && mine_x > 0)              grid.get(mine_y-1).get(mine_x-1).incNumberOfAdjacentMines();
             if(mine_y > 0)                            grid.get(mine_y-1).get(mine_x).incNumberOfAdjacentMines();
@@ -81,7 +82,7 @@ public class Grid extends Observable {
         } 
     }
     
-    
+    /*
    public void unveilNeighbors(Cell cell) {
         int mine_x = cell.getPosition().getX();
         int mine_y = cell.getPosition().getY();
@@ -100,6 +101,7 @@ public class Grid extends Observable {
             if(mine_x > 0 && !grid.get(mine_y).get(mine_x-1).isVisible())                            unveilNeighbors(grid.get(mine_y).get(mine_x-1));   
         }       
    }
+    */
 
     /**
      * @return the grid
@@ -148,6 +150,11 @@ public class Grid extends Observable {
      */
     public void setWin(boolean win) {
         this.win = win;
+    }
+
+    @Override
+    public void update(Observable o, Object arg) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }

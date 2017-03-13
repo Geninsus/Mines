@@ -20,9 +20,11 @@ import lab4.views.GraphicalFrameView;
  */
 public class FrameController {
     public GraphicalFrameView view;
+    private int round;
     public FrameController() {
-        GraphicalFrameView Frameview = new GraphicalFrameView("Démineur", 300, 300);
-        this.view = Frameview;
+        this.view = new GraphicalFrameView("Démineur", 300, 300);
+        
+        /* Création du model Grid */
         Grid model = null;
         try {
             model = new Grid(12, 12, 10);
@@ -33,7 +35,23 @@ public class FrameController {
         } catch (TooManyMinesException ex) {
             Logger.getLogger(Lab4.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
+        /* Création du controller Grid */
         GridController controller = new GridController(this, model);
         model.updateGrid();
+    }
+
+    /**
+     * @return the round
+     */
+    public int getRound() {
+        return round;
+    }
+
+    /**
+     * @param round the round to set
+     */
+    public void incRound() {
+        this.round ++;
     }
 }

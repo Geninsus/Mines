@@ -17,13 +17,30 @@ public class Cell extends Observable {
     private char marking = 'u';
     private boolean mine;
     private int NumberOfAdjacentMines;
-    private boolean visible;
+    private boolean unveil;
     private boolean selected;
     
     public Cell(Position position) {
       this.position = position;  
     }
     
+    /**
+     * @return the unveil
+     */
+    public boolean isUnveil() {
+        return unveil;
+    }
+
+    /**
+     * @param unveil the unveil to set
+     */
+    public void unveil() {
+        this.unveil = true;
+        
+        setChanged();
+        notifyObservers();
+    }
+    /*
     public char charToDisplay() {
         if(visible) {
             if(isMine()) {
@@ -43,21 +60,8 @@ public class Cell extends Observable {
             
         }
     }
+    */
     
-    /**
-     * @return the visible
-     */
-    public boolean isVisible() {
-        return visible;
-    }
-
-    /**
-     * @param visible the visible to set
-     */
-    public void setVisible(boolean visible) {
-        this.visible = visible;
-    }
-
     /**
      * @return the selected
      */
@@ -134,4 +138,6 @@ public class Cell extends Observable {
     public void setMine(boolean mine) {
         this.mine = mine;
     }
+
+    
 }

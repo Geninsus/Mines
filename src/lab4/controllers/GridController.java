@@ -16,9 +16,9 @@ import lab4.views.GraphicalGridView;
  */
 public class GridController {
     
-    private FrameController frame;
+    public FrameController frame;
     private ArrayList<ArrayList<CellController>> cellsController = new ArrayList<ArrayList<CellController>>();
-    private Grid model;
+    public Grid model;
     private GraphicalGridView view;
     private boolean firstUnveiling = true;
     

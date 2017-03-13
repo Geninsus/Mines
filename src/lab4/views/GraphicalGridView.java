@@ -11,18 +11,13 @@ import java.awt.GridLayout;
  *
  * @author guillaume
  */
-public class GraphicalGridView extends GridLayout{
+public class GraphicalGridView extends GridLayout {
     public GraphicalFrameView frame;
-    private int row;
-    private int column;
     
     public GraphicalGridView(GraphicalFrameView frame, int row, int column) {
         super(row,column,0,0);
         this.frame = frame;
-        this.row = row;
-        this.column = column;
         frame.setLayout(this);
-        System.out.println("lab4.views.GraphicalGridView.<init>()");
     }
     
 }

@@ -5,8 +5,8 @@
  */
 package lab4.controllers;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import lab4.models.Cell;
 import lab4.views.GraphicalCellView;
 
@@ -14,7 +14,7 @@ import lab4.views.GraphicalCellView;
  *
  * @author fabien
  */
-public class CellController implements ActionListener {
+public class CellController extends MouseAdapter {
     
     private GridController gridController;
     private Cell model;
@@ -23,12 +23,27 @@ public class CellController implements ActionListener {
     public CellController(GridController gridController,Cell model){
         this.gridController = gridController;
         this.model = model;
-        this.view = new GraphicalCellView("", gridController.getView());
+        this.view = new GraphicalCellView(gridController.getView());
         view.addController(this);
+        model.addObserver(view);
+
     }
 
     @Override
-    public void actionPerformed(ActionEvent e) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void mouseClicked(MouseEvent e){
+        /* Clique gauche */
+        if(e.getButton() == 1) {
+            model.unveil();
+            gridController.frame.incRound();
+            if(gridController.frame.getRound() == 1) {
+                gridController.model.generateMines();
+            }
+            
+        /* Clique droit */
+        } else if(e.getButton() == 3) {
+            System.out.println("clique droit");
+        }
     }
+
+
 }
