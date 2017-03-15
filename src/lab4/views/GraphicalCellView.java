@@ -37,9 +37,10 @@ public class GraphicalCellView extends JButton implements Observer {
         
         if(model.isUnveil()) {
             this.setEnabled(false);
-            this.setText(Integer.toString(model.getNumberOfAdjacentMines()));
+            if(model.getNumberOfAdjacentMines() > 0) {
+               this.setText(Integer.toString(model.getNumberOfAdjacentMines())); 
+            }
         } else {
-            
         }
     }
 

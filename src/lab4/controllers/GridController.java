@@ -29,15 +29,13 @@ public class GridController {
         for (int i = 0; i < model.getHeight(); i++) {
             this.cellsController.add(new ArrayList<CellController>());
             for (int j = 0; j < model.getWidth(); j++) {
-                this.cellsController.get(i).add(new CellController(this,this.model.getGrid().get(j).get(i)));
-                
+                this.cellsController.get(i).add(new CellController(this,this.model.getGrid().get(j).get(i)));                
             }
         }
-        System.out.println("lab4.controllers.GridController.<init>()");
-        frame.view.setSize(300, 400);
-         frame.view.setSize(300,400);
-    frame.view.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-    frame.view.setVisible(true);
+        updateNeighbours();
+        frame.view.setSize(300,400);
+        frame.view.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.view.setVisible(true);
     }
 
     /**
@@ -45,6 +43,21 @@ public class GridController {
      */
     public GraphicalGridView getView() {
         return view;
+    }
+    
+    public void updateNeighbours() {
+        for (int i = 0; i < model.getHeight(); i++) {
+            for (int j = 0; j < model.getWidth(); j++) {                      
+                if(j>0 && i > 0){ model.getGrid().get(j).get(i).addNeighbours(model.getGrid().get(j-1).get(i-1));}
+                if(i > 0){ model.getGrid().get(j).get(i).addNeighbours(model.getGrid().get(j).get(i-1));}
+                if(i>0 && j < model.getWidth()-1){ model.getGrid().get(j).get(i).addNeighbours(model.getGrid().get(j+1).get(i-1));}
+                if(j < model.getWidth()-1){ model.getGrid().get(j).get(i).addNeighbours(model.getGrid().get(j+1).get(i));}
+                if(i < model.getHeight()-1 && j < model.getWidth()-1){ model.getGrid().get(j).get(i).addNeighbours(model.getGrid().get(j+1).get(i+1));}
+                if(i < model.getHeight()-1){ model.getGrid().get(j).get(i).addNeighbours(model.getGrid().get(j).get(i+1));}
+                if(i < model.getHeight()-1 && j > 0){ model.getGrid().get(j).get(i).addNeighbours(model.getGrid().get(j-1).get(i+1));}
+                if(j>0){ model.getGrid().get(j).get(i).addNeighbours(model.getGrid().get(j-1).get(i));}
+            }
+        }
     }
 }
     /**

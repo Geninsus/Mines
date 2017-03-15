@@ -82,26 +82,24 @@ public class Grid extends Observable implements Observer{
         } 
     }
     
-    /*
    public void unveilNeighbors(Cell cell) {
         int mine_x = cell.getPosition().getX();
         int mine_y = cell.getPosition().getY();
-        cell.setVisible(true);
+        cell.unveil();
         if(cell.isMine()) {
             this.setLost(true);
         }
         if(cell.getNumberOfAdjacentMines() == 0) {
-            if(mine_y > 0 && mine_x > 0 && !grid.get(mine_y-1).get(mine_x-1).isVisible())              unveilNeighbors(grid.get(mine_y-1).get(mine_x-1));
-            if(mine_y > 0 && !grid.get(mine_y-1).get(mine_x).isVisible())                            unveilNeighbors(grid.get(mine_y-1).get(mine_x));
-            if(mine_y > 0 && mine_x < width-1 && !grid.get(mine_y-1).get(mine_x+1).isVisible())        unveilNeighbors(grid.get(mine_y-1).get(mine_x+1));
-            if(mine_x < width-1 && !grid.get(mine_y).get(mine_x+1).isVisible())                      unveilNeighbors(grid.get(mine_y).get(mine_x+1));
-            if(mine_y < height-1 && mine_x < width-1 && !grid.get(mine_y+1).get(mine_x+1).isVisible()) unveilNeighbors(grid.get(mine_y+1).get(mine_x+1));
-            if(mine_y < height-1 && !grid.get(mine_y+1).get(mine_x).isVisible())                     unveilNeighbors(grid.get(mine_y+1).get(mine_x));
-            if(mine_y < height-1 && mine_x > 0 && !grid.get(mine_y+1).get(mine_x-1).isVisible())       unveilNeighbors(grid.get(mine_y+1).get(mine_x-1));
-            if(mine_x > 0 && !grid.get(mine_y).get(mine_x-1).isVisible())                            unveilNeighbors(grid.get(mine_y).get(mine_x-1));   
+            if(mine_y > 0 && mine_x > 0 && !grid.get(mine_y-1).get(mine_x-1).isUnveil())              unveilNeighbors(grid.get(mine_y-1).get(mine_x-1));
+            if(mine_y > 0 && !grid.get(mine_y-1).get(mine_x).isUnveil())                            unveilNeighbors(grid.get(mine_y-1).get(mine_x));
+            if(mine_y > 0 && mine_x < width-1 && !grid.get(mine_y-1).get(mine_x+1).isUnveil())        unveilNeighbors(grid.get(mine_y-1).get(mine_x+1));
+            if(mine_x < width-1 && !grid.get(mine_y).get(mine_x+1).isUnveil())                      unveilNeighbors(grid.get(mine_y).get(mine_x+1));
+            if(mine_y < height-1 && mine_x < width-1 && !grid.get(mine_y+1).get(mine_x+1).isUnveil()) unveilNeighbors(grid.get(mine_y+1).get(mine_x+1));
+            if(mine_y < height-1 && !grid.get(mine_y+1).get(mine_x).isUnveil())                     unveilNeighbors(grid.get(mine_y+1).get(mine_x));
+            if(mine_y < height-1 && mine_x > 0 && !grid.get(mine_y+1).get(mine_x-1).isUnveil())       unveilNeighbors(grid.get(mine_y+1).get(mine_x-1));
+            if(mine_x > 0 && !grid.get(mine_y).get(mine_x-1).isUnveil())                            unveilNeighbors(grid.get(mine_y).get(mine_x-1));   
         }       
    }
-    */
 
     /**
      * @return the grid

@@ -5,6 +5,7 @@
  */
 package lab4.models;
 
+import java.util.ArrayList;
 import java.util.Observable;
 
 /**
@@ -19,9 +20,11 @@ public class Cell extends Observable {
     private int NumberOfAdjacentMines;
     private boolean unveil;
     private boolean selected;
+    public ArrayList<Cell> neighbours;
     
     public Cell(Position position) {
-      this.position = position;  
+      this.position = position;
+      neighbours = new ArrayList();
     }
     
     /**
@@ -35,10 +38,17 @@ public class Cell extends Observable {
      * @param unveil the unveil to set
      */
     public void unveil() {
-        this.unveil = true;
-        
-        setChanged();
-        notifyObservers();
+        if(this.unveil == false) {
+          System.out.println(this);
+           this.unveil = true;
+            setChanged();
+            notifyObservers();
+            neighbours.forEach((neighbour) -> {
+                if(!neighbour.isUnveil()) neighbour.unveil();
+                //System.out.println(neighbour.isUnveil());
+            }); 
+            System.out.println("###");
+        }
     }
     /*
     public char charToDisplay() {
@@ -138,6 +148,9 @@ public class Cell extends Observable {
     public void setMine(boolean mine) {
         this.mine = mine;
     }
-
     
+    public void addNeighbours(Cell neighbour) {
+        this.neighbours.add(neighbour);
+    }
+
 }

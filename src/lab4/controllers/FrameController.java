@@ -27,7 +27,7 @@ public class FrameController {
         /* Création du model Grid */
         Grid model = null;
         try {
-            model = new Grid(12, 12, 10);
+            model = new Grid(4, 4, 25);
         } catch (NegativeLengthException ex) {
             Logger.getLogger(Lab4.class.getName()).log(Level.SEVERE, null, ex);
         } catch (NegativePourcentageException ex) {

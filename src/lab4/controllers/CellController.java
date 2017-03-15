@@ -25,8 +25,7 @@ public class CellController extends MouseAdapter {
         this.model = model;
         this.view = new GraphicalCellView(gridController.getView());
         view.addController(this);
-        model.addObserver(view);
-
+        model.addObserver(view);  
     }
 
     @Override
