@@ -7,12 +7,14 @@ package lab4.controllers;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JMenuBar;
 import lab4.Lab4;
 import lab4.exceptions.NegativeLengthException;
 import lab4.exceptions.NegativePourcentageException;
 import lab4.exceptions.TooManyMinesException;
 import lab4.models.Grid;
 import lab4.views.GraphicalFrameView;
+import lab4.views.GraphicalMenuView;
 
 /**
  *
@@ -23,11 +25,13 @@ public class FrameController {
     private int round;
     public FrameController() {
         this.view = new GraphicalFrameView("Démineur", 300, 300);
+        GraphicalMenuView menuBar = new GraphicalMenuView();
+        view.setJMenuBar(menuBar);
         
         /* Création du model Grid */
         Grid model = null;
         try {
-            model = new Grid(4, 4, 25);
+            model = new Grid(12, 12, 10);
         } catch (NegativeLengthException ex) {
             Logger.getLogger(Lab4.class.getName()).log(Level.SEVERE, null, ex);
         } catch (NegativePourcentageException ex) {

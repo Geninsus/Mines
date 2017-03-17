@@ -32,15 +32,16 @@ public class CellController extends MouseAdapter {
     public void mouseClicked(MouseEvent e){
         /* Clique gauche */
         if(e.getButton() == 1) {
-            model.unveil();
+            model.setUnveil(true);
             gridController.frame.incRound();
             if(gridController.frame.getRound() == 1) {
                 gridController.model.generateMines();
             }
+            model.unveil();
             
         /* Clique droit */
         } else if(e.getButton() == 3) {
-            System.out.println("clique droit");
+            model.mark();
         }
     }
 

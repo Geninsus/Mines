@@ -20,7 +20,7 @@ public class Cell extends Observable {
     private int NumberOfAdjacentMines;
     private boolean unveil;
     private boolean selected;
-    public ArrayList<Cell> neighbours;
+    private ArrayList<Cell> neighbours;
     
     public Cell(Position position) {
       this.position = position;
@@ -38,17 +38,26 @@ public class Cell extends Observable {
      * @param unveil the unveil to set
      */
     public void unveil() {
-        if(this.unveil == false) {
-          System.out.println(this);
-           this.unveil = true;
-            setChanged();
-            notifyObservers();
-            neighbours.forEach((neighbour) -> {
-                if(!neighbour.isUnveil()) neighbour.unveil();
-                //System.out.println(neighbour.isUnveil());
-            }); 
-            System.out.println("###");
+        this.setUnveil(true);
+         setChanged();
+         notifyObservers();
+         if(NumberOfAdjacentMines == 0) {
+           neighbours.forEach((neighbour) -> {
+             if(!neighbour.isUnveil()) neighbour.unveil();
+         });   
+         }
+    }
+    
+    public void mark() {
+        if(marking == 'u') {
+            marking = 'f';
+        } else if(marking == 'f') {
+            marking = '?';
+        } else if(marking == '?') {
+            marking = 'u';
         }
+        setChanged();
+        notifyObservers();  
     }
     /*
     public char charToDisplay() {
@@ -151,6 +160,13 @@ public class Cell extends Observable {
     
     public void addNeighbours(Cell neighbour) {
         this.neighbours.add(neighbour);
+    }
+
+    /**
+     * @param unveil the unveil to set
+     */
+    public void setUnveil(boolean unveil) {
+        this.unveil = unveil;
     }
 
 }

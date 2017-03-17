@@ -5,6 +5,7 @@
  */
 package lab4.views;
 import javax.swing.JFrame;
+import javax.swing.JMenuBar;
 
 /**
  *
@@ -17,6 +18,10 @@ public class GraphicalFrameView extends JFrame{
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setSize(width, height);
         this.setVisible(true);
+    }
+    
+    public void addMenu(JMenuBar menuBar){
+        this.setJMenuBar(menuBar);
     }
     
 }
