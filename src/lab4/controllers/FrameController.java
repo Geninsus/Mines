@@ -25,7 +25,8 @@ public class FrameController {
     private int round;
     public FrameController() {
         this.view = new GraphicalFrameView("Démineur", 300, 300);
-        GraphicalMenuView menuBar = new GraphicalMenuView();
+        MenuController menuControl = new MenuController();
+        GraphicalMenuView menuBar = new GraphicalMenuView(menuControl);
         view.setJMenuBar(menuBar);
         
         /* Création du model Grid */
