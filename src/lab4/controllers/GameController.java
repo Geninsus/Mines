@@ -14,9 +14,11 @@ import lab4.exceptions.NegativeNumberException;
 import lab4.exceptions.TooManyMinesException;
 import lab4.models.Game;
 import lab4.models.Grid;
+import lab4.models.Timer;
 import lab4.views.GraphicalGameView;
 import lab4.views.GraphicalMenuView;
 import lab4.views.GraphicalStatusBarView;
+import lab4.views.GraphicalTimerView;
 
 /**
  *
@@ -33,7 +35,12 @@ public class GameController {
         GraphicalMenuView menuBar = new GraphicalMenuView(menuControl);
         view.setJMenuBar(menuBar);
         GraphicalStatusBarView statusBar = new GraphicalStatusBarView(model);
-        view.add(statusBar, BorderLayout.SOUTH);
+        Timer timer = new Timer();
+        GraphicalTimerView timerView = new GraphicalTimerView();
+        timer.addObserver(timerView);
+        
+        view.add(timerView, BorderLayout.SOUTH);
+        //view.add(statusBar, BorderLayout.SOUTH);
         model.addObserver(statusBar);
         
         /* Création du model Grid */
