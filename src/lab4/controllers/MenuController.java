@@ -44,11 +44,8 @@ public class MenuController implements ActionListener{
                 gameController = new GameController(new Game(16, 30, 99));
                 break;
             case "Custom":
-                JFrame customFrame = new JFrame("Custom Game");
-                customFrame.setSize(300, 200);
-                customFrame.setVisible(true);
-                customFrame.setLayout(new BorderLayout(5, 5));
-                customFrame.add(new GraphicalCustomGameView(), BorderLayout.CENTER);
+                
+                CustomGameController customGameController = new CustomGameController();
                 break;
             default:
                 break;
