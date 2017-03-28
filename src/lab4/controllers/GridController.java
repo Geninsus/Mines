@@ -7,6 +7,7 @@ package lab4.controllers;
 
 import java.util.ArrayList;
 import javax.swing.JFrame;
+import lab4.models.Cell;
 import lab4.models.Grid;
 import lab4.views.GraphicalGridView;
 
@@ -16,26 +17,25 @@ import lab4.views.GraphicalGridView;
  */
 public class GridController {
     
-    public FrameController frame;
+    public GameController game;
     private ArrayList<ArrayList<CellController>> cellsController = new ArrayList<ArrayList<CellController>>();
     public Grid model;
     private GraphicalGridView view;
     private boolean firstUnveiling = true;
     
-    public GridController(FrameController frameController, Grid model) {
-        this.frame = frameController;
+    public GridController(GameController frameController, Grid model) {
+        this.game = frameController;
         this.model = model;
-        this.view = new GraphicalGridView(frame.view, model.getWidth(), model.getHeight());
-        for (int i = 0; i < model.getHeight(); i++) {
+        this.view = new GraphicalGridView(game.view, model.getHeight(), model.getWidth());
+        for (int y = 0; y < model.getHeight(); y++) {
             this.cellsController.add(new ArrayList<CellController>());
-            for (int j = 0; j < model.getWidth(); j++) {
-                this.cellsController.get(i).add(new CellController(this,this.model.getGrid().get(j).get(i)));                
+            for (int x = 0; x < model.getWidth(); x++) {
+                this.cellsController.get(y).add(new CellController(this,this.model.getGrid().get(y).get(x)));                
             }
         }
         updateNeighbours();
-        frame.view.setSize(300,400);
-        frame.view.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.view.setVisible(true);
+        game.view.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        game.view.setVisible(true);
     }
 
     /**
@@ -46,16 +46,24 @@ public class GridController {
     }
     
     public void updateNeighbours() {
-        for (int i = 0; i < model.getHeight(); i++) {
-            for (int j = 0; j < model.getWidth(); j++) {                      
-                if(j>0 && i > 0){ model.getGrid().get(j).get(i).addNeighbours(model.getGrid().get(j-1).get(i-1));}
-                if(i > 0){ model.getGrid().get(j).get(i).addNeighbours(model.getGrid().get(j).get(i-1));}
-                if(i>0 && j < model.getWidth()-1){ model.getGrid().get(j).get(i).addNeighbours(model.getGrid().get(j+1).get(i-1));}
-                if(j < model.getWidth()-1){ model.getGrid().get(j).get(i).addNeighbours(model.getGrid().get(j+1).get(i));}
-                if(i < model.getHeight()-1 && j < model.getWidth()-1){ model.getGrid().get(j).get(i).addNeighbours(model.getGrid().get(j+1).get(i+1));}
-                if(i < model.getHeight()-1){ model.getGrid().get(j).get(i).addNeighbours(model.getGrid().get(j).get(i+1));}
-                if(i < model.getHeight()-1 && j > 0){ model.getGrid().get(j).get(i).addNeighbours(model.getGrid().get(j-1).get(i+1));}
-                if(j>0){ model.getGrid().get(j).get(i).addNeighbours(model.getGrid().get(j-1).get(i));}
+        System.out.println(model.getWidth());
+        for (int y = 0; y < model.getHeight(); y++) {
+            for (int x = 0; x < model.getWidth(); x++) {
+                if(x>0 && y > 0){ model.getGrid().get(y).get(x).addNeighbours(model.getGrid().get(y-1).get(x-1));}
+                if(y > 0){ model.getGrid().get(y).get(x).addNeighbours(model.getGrid().get(y-1).get(x));}
+                if(y>0 && x < model.getWidth()-1){ model.getGrid().get(y).get(x).addNeighbours(model.getGrid().get(y-1).get(x+1));}
+                if(x < model.getWidth()-1){ model.getGrid().get(y).get(x).addNeighbours(model.getGrid().get(y).get(x+1));}
+                if(y < model.getHeight()-1 && x < model.getWidth()-1){ model.getGrid().get(y).get(x).addNeighbours(model.getGrid().get(y+1).get(x+1));}
+                if(y < model.getHeight()-1){ model.getGrid().get(y).get(x).addNeighbours(model.getGrid().get(y+1).get(x));}
+                if(y < model.getHeight()-1 && x > 0){ model.getGrid().get(y).get(x).addNeighbours(model.getGrid().get(y+1).get(x-1));}
+                if(x>0){ model.getGrid().get(y).get(x).addNeighbours(model.getGrid().get(y).get(x-1));}
+            if(y == 0 && x == 29 ) {
+                System.out.println(model.getGrid().get(y).get(x).getPosition().getX() + " - " + model.getGrid().get(y).get(x).getPosition().getY());
+                System.out.println("lab4.controllers.GridController.updateNeighbours()");
+                for (Cell neighbour : model.getGrid().get(y).get(x).neighbours) {
+                    System.out.println(neighbour.getPosition().getX() + " - " + neighbour.getPosition().getY());
+                }
+            }
             }
         }
     }

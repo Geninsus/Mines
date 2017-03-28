@@ -17,9 +17,12 @@ import lab4.models.Cell;
  */
 public class GraphicalCellView extends JButton implements Observer {
     
-    public GraphicalCellView(GraphicalGridView grid) {
+    public GraphicalCellView(GraphicalGridView grid, Cell model) {
         super("");
-        grid.frame.add(this);
+        grid.frame.centerPanel.add(this);
+        //this.setText(String.valueOf(model.getPosition().getY()));
+        
+        
     }
     
     public void addController(CellController controller) {

@@ -5,7 +5,8 @@
  */
 package lab4;
 
-import lab4.controllers.FrameController;
+import lab4.controllers.GameController;
+import lab4.models.Game;
 
 /**
  *
@@ -17,7 +18,7 @@ public class Lab4 {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        FrameController frame = new FrameController();
+        GameController gameController = new GameController(new Game(9, 9, 10));
     }
     
 }

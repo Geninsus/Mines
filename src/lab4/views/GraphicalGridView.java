@@ -12,12 +12,12 @@ import java.awt.GridLayout;
  * @author guillaume
  */
 public class GraphicalGridView extends GridLayout {
-    public GraphicalFrameView frame;
+    public GraphicalGameView frame;
     
-    public GraphicalGridView(GraphicalFrameView frame, int row, int column) {
+    public GraphicalGridView(GraphicalGameView frame, int row, int column) {
         super(row,column,0,0);
         this.frame = frame;
-        frame.setLayout(this);
+        frame.centerPanel.setLayout(this);
     }
     
 }

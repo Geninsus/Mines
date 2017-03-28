@@ -14,15 +14,17 @@ import java.util.Observable;
  */
 public class Cell extends Observable {
 
+    private Game game;
     private Position position;
     private char marking = 'u';
     private boolean mine;
     private int NumberOfAdjacentMines;
     private boolean unveil;
     private boolean selected;
-    private ArrayList<Cell> neighbours;
+    public ArrayList<Cell> neighbours;
     
-    public Cell(Position position) {
+    public Cell(Game game, Position position) {
+      this.game = game;
       this.position = position;
       neighbours = new ArrayList();
     }
@@ -38,6 +40,7 @@ public class Cell extends Observable {
      * @param unveil the unveil to set
      */
     public void unveil() {
+        System.out.println("unveil " + this.position.getX() + " - " + this.position.getY());
         this.setUnveil(true);
          setChanged();
          notifyObservers();
@@ -51,8 +54,10 @@ public class Cell extends Observable {
     public void mark() {
         if(marking == 'u') {
             marking = 'f';
+            game.decRemainingMines();
         } else if(marking == 'f') {
             marking = '?';
+            game.incRemainingMines();
         } else if(marking == '?') {
             marking = 'u';
         }

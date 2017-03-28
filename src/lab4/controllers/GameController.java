@@ -5,58 +5,50 @@
  */
 package lab4.controllers;
 
+import java.awt.BorderLayout;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JMenuBar;
 import lab4.Lab4;
 import lab4.exceptions.NegativeLengthException;
-import lab4.exceptions.NegativePourcentageException;
+import lab4.exceptions.NegativeNumberException;
 import lab4.exceptions.TooManyMinesException;
+import lab4.models.Game;
 import lab4.models.Grid;
-import lab4.views.GraphicalFrameView;
+import lab4.views.GraphicalGameView;
 import lab4.views.GraphicalMenuView;
+import lab4.views.GraphicalStatusBarView;
 
 /**
  *
  * @author fabien
  */
-public class FrameController {
-    public GraphicalFrameView view;
-    private int round;
-    public FrameController() {
-        this.view = new GraphicalFrameView("Démineur", 300, 300);
-        MenuController menuControl = new MenuController();
+public class GameController {
+    public GraphicalGameView view;
+    public Game model;
+    public GameController(Game game) {
+        this.model = game;
+        this.view = new GraphicalGameView("Démineur", 500, 500);
+
+        MenuController menuControl = new MenuController(this);
         GraphicalMenuView menuBar = new GraphicalMenuView(menuControl);
         view.setJMenuBar(menuBar);
+        GraphicalStatusBarView statusBar = new GraphicalStatusBarView(model);
+        view.add(statusBar, BorderLayout.SOUTH);
+        model.addObserver(statusBar);
         
         /* Création du model Grid */
-        Grid model = null;
+        Grid gridModel = null;
         try {
-            model = new Grid(12, 12, 10);
+            gridModel = new Grid(model, model.getHeight(), model.getWidth(), model.getMinePercentage());
         } catch (NegativeLengthException ex) {
             Logger.getLogger(Lab4.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (NegativePourcentageException ex) {
+        } catch (NegativeNumberException ex) {
             Logger.getLogger(Lab4.class.getName()).log(Level.SEVERE, null, ex);
         } catch (TooManyMinesException ex) {
             Logger.getLogger(Lab4.class.getName()).log(Level.SEVERE, null, ex);
         }
         
         /* Création du controller Grid */
-        GridController controller = new GridController(this, model);
-        model.updateGrid();
-    }
-
-    /**
-     * @return the round
-     */
-    public int getRound() {
-        return round;
-    }
-
-    /**
-     * @param round the round to set
-     */
-    public void incRound() {
-        this.round ++;
+        GridController controller = new GridController(this, gridModel);
     }
 }

@@ -9,8 +9,8 @@ package lab4.exceptions;
  *
  * @author fabien
  */
-public class NegativePourcentageException extends Exception{
-    public NegativePourcentageException(double pourcentage) {
+public class NegativeNumberException extends Exception{
+    public NegativeNumberException(double pourcentage) {
         super("Unexpected negative pourcentage " + pourcentage + ".");
     }
 }

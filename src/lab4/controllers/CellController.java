@@ -23,7 +23,7 @@ public class CellController extends MouseAdapter {
     public CellController(GridController gridController,Cell model){
         this.gridController = gridController;
         this.model = model;
-        this.view = new GraphicalCellView(gridController.getView());
+        this.view = new GraphicalCellView(gridController.getView(), model);
         view.addController(this);
         model.addObserver(view);  
     }
@@ -33,8 +33,8 @@ public class CellController extends MouseAdapter {
         /* Clique gauche */
         if(e.getButton() == 1) {
             model.setUnveil(true);
-            gridController.frame.incRound();
-            if(gridController.frame.getRound() == 1) {
+            gridController.game.model.incRound();
+            if(gridController.game.model.getRound() == 1) {
                 gridController.model.generateMines();
             }
             model.unveil();
