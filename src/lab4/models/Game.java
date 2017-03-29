@@ -18,6 +18,7 @@ public class Game extends Observable implements Observer{
     private int width;
     private int height;
     private int numberOfMine;
+    public Timer timer;
     
     public Game(int height, int width, int numberOfMine) {
         this.width = width;
@@ -77,6 +78,9 @@ public class Game extends Observable implements Observer{
      */
     public void incRound() {
         this.round ++;
+        if(round == 1) {
+            timer.start();
+        }
     }
 
     /**

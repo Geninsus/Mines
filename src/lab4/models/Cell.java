@@ -40,7 +40,6 @@ public class Cell extends Observable {
      * @param unveil the unveil to set
      */
     public void unveil() {
-        System.out.println("unveil " + this.position.getX() + " - " + this.position.getY());
         this.setUnveil(true);
          setChanged();
          notifyObservers();

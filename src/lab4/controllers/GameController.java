@@ -1,4 +1,4 @@
-/*
+/**
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
@@ -36,11 +36,13 @@ public class GameController {
         view.setJMenuBar(menuBar);
         GraphicalStatusBarView statusBar = new GraphicalStatusBarView(model);
         Timer timer = new Timer();
+        model.timer = timer;
         GraphicalTimerView timerView = new GraphicalTimerView();
         timer.addObserver(timerView);
         
-        view.add(timerView, BorderLayout.SOUTH);
-        //view.add(statusBar, BorderLayout.SOUTH);
+        view.add(timerView, BorderLayout.NORTH);
+        timerView.setText("Timer: 0");
+        view.add(statusBar, BorderLayout.SOUTH);
         model.addObserver(statusBar);
         
         /* Création du model Grid */
