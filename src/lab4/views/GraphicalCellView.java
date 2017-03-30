@@ -29,6 +29,7 @@ public class GraphicalCellView extends JButton implements Observer {
     
     private void init(GraphicalGridView grid, Cell model) {
         grid.frame.centerPanel.add(this);
+        this.setFocusable(false);
     }
     
     public void addController(CellController controller) {
