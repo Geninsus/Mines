@@ -15,7 +15,7 @@ import lab4.models.Game;
  *
  * @author fabien
  */
-public class GraphicalStatusBarView extends JLabel implements Observer{
+final public class GraphicalStatusBarView extends JLabel implements Observer{
     public GraphicalStatusBarView(Game game) {
         super();
         game.addObserver(this);

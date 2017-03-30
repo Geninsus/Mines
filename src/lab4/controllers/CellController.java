@@ -16,14 +16,14 @@ import lab4.views.GraphicalCellView;
  */
 public class CellController extends MouseAdapter {
     
-    private GridController gridController;
-    private Cell model;
-    private GraphicalCellView view;
+    private final GridController gridController;
+    private final Cell model;
+    private final GraphicalCellView view;
     
     public CellController(GridController gridController,Cell model){
         this.gridController = gridController;
         this.model = model;
-        this.view = new GraphicalCellView(gridController.getView(), model);
+        this.view = GraphicalCellView.create(gridController.getView(), model);
         view.addController(this);
         model.addObserver(view);  
     }

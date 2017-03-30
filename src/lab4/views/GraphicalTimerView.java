@@ -15,7 +15,7 @@ import lab4.models.Timer;
  *
  * @author Guillaume
  */
-public class GraphicalTimerView extends JLabel implements Observer{
+final public class GraphicalTimerView extends JLabel implements Observer{
     
     public GraphicalTimerView() {
         super();

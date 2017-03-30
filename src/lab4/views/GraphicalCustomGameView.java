@@ -12,12 +12,10 @@ import java.util.Observable;
 import java.util.Observer;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JSlider;
-import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
@@ -25,7 +23,7 @@ import javax.swing.SwingConstants;
  *
  * @author fabien
  */
-public class GraphicalCustomGameView extends JPanel implements Observer{
+final public class GraphicalCustomGameView extends JPanel implements Observer{
     public GraphicalCustomGameView() {
         super();
         this.setLayout(new BorderLayout());

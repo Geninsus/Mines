@@ -18,7 +18,7 @@ public class Lab4 {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        GameController gameController = new GameController(new Game(9, 9, 10));
+        GameController gameController = GameController.create(new Game(9, 9, 10));
     }
     
 }

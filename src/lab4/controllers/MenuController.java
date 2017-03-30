@@ -5,13 +5,9 @@
  */
 package lab4.controllers;
 
-import java.awt.BorderLayout;
-import java.awt.Frame;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import javax.swing.JFrame;
 import lab4.models.Game;
-import lab4.views.GraphicalCustomGameView;
 
 /**
  *
@@ -33,15 +29,15 @@ public class MenuController implements ActionListener{
                 break;
             case "Beginner":
                 gameController.view.dispose();
-                gameController = new GameController(new Game(9, 9, 10));
+                gameController = GameController.create(new Game(9, 9, 10));
                 break;
             case "Intermediaire":
                 gameController.view.dispose();
-                gameController = new GameController(new Game(16, 16, 40));
+                gameController = GameController.create(new Game(16, 16, 40));
                 break;
             case "Expert":
                 gameController.view.dispose();
-                gameController = new GameController(new Game(16, 30, 99));
+                gameController = GameController.create(new Game(16, 30, 99));
                 break;
             case "Custom":
                 

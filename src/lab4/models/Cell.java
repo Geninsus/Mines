@@ -14,7 +14,7 @@ import java.util.Observable;
  */
 public class Cell extends Observable {
 
-    private Game game;
+    private final Game game;
     private Position position;
     private char marking = 'u';
     private boolean mine;
@@ -37,7 +37,6 @@ public class Cell extends Observable {
     }
 
     /**
-     * @param unveil the unveil to set
      */
     public void unveil() {
         
@@ -55,14 +54,20 @@ public class Cell extends Observable {
     }
     
     public void mark() {
-        if(marking == 'u') {
-            marking = 'f';
-            game.decRemainingMines();
-        } else if(marking == 'f') {
-            marking = '?';
-            game.incRemainingMines();
-        } else if(marking == '?') {
-            marking = 'u';
+        switch (marking) {
+            case 'u':
+                marking = 'f';
+                game.decRemainingMines();
+                break;
+            case 'f':
+                marking = '?';
+                game.incRemainingMines();
+                break;
+            case '?':
+                marking = 'u';
+                break;
+            default:
+                break;
         }
         setChanged();
         notifyObservers();  

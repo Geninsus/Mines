@@ -27,9 +27,15 @@ import lab4.views.GraphicalTimerView;
 public class GameController {
     public GraphicalGameView view;
     public Game model;
+    
+    public static GameController create(Game game) {
+        GameController gameController = new GameController(game);
+        gameController.init();
+        return gameController;
+    }
+    
     public GameController(Game game) {
         this.model = game;
-        this.model.controller = this;
         this.view = new GraphicalGameView("Démineur", 500, 500);
 
         MenuController menuControl = new MenuController(this);
@@ -50,15 +56,15 @@ public class GameController {
         Grid gridModel = null;
         try {
             gridModel = new Grid(model, model.getHeight(), model.getWidth(), model.getMinePercentage());
-        } catch (NegativeLengthException ex) {
-            Logger.getLogger(Lab4.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (NegativeNumberException ex) {
-            Logger.getLogger(Lab4.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (TooManyMinesException ex) {
+        } catch (NegativeLengthException | NegativeNumberException | TooManyMinesException ex) {
             Logger.getLogger(Lab4.class.getName()).log(Level.SEVERE, null, ex);
         }
         
         /* Création du controller Grid */
-        GridController controller = new GridController(this, gridModel);
+        GridController gridController = new GridController(this, gridModel);
+    }
+    
+    public void init() {
+        this.model.controller = this;
     }
 }

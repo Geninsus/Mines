@@ -17,9 +17,9 @@ import lab4.controllers.GameController;
 public class Game extends Observable implements Observer{
     private int remainingMines;
     private int round;
-    private int width;
-    private int height;
-    private int numberOfMine;
+    private final int width;
+    private final int height;
+    private final int numberOfMine;
     public Timer timer;
     public GameController controller;
     
@@ -34,10 +34,9 @@ public class Game extends Observable implements Observer{
     }
     
     public void lost() {
-        JOptionPane d = new JOptionPane();
-        d.showMessageDialog( controller.view, "PERDU :'(", "Démineur", JOptionPane.PLAIN_MESSAGE);
+        JOptionPane.showMessageDialog( controller.view, "PERDU :'(", "Démineur", JOptionPane.PLAIN_MESSAGE);
         controller.view.dispose();
-        controller = new GameController(new Game(9, 9, 10));
+        controller = GameController.create(new Game(9, 9, 10));
     }
 
     /**
@@ -88,7 +87,6 @@ public class Game extends Observable implements Observer{
     }
 
     /**
-     * @param round the round to set
      */
     public void incRound() {
         this.round ++;

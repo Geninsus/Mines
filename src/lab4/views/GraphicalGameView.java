@@ -13,7 +13,7 @@ import javax.swing.JPanel;
  *
  * @author guillaume
  */
-public class GraphicalGameView extends JFrame{
+final public class GraphicalGameView extends JFrame{
     
     public JPanel centerPanel;
     
