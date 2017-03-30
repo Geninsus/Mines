@@ -33,12 +33,14 @@ public class Game extends Observable implements Observer{
     }
     
     public void win() {
-        JOptionPane.showMessageDialog( controller.view, "GAGNÉ :)", "Démineur", JOptionPane.PLAIN_MESSAGE);
+        timer.stop();
+        JOptionPane.showMessageDialog( controller.view, "GAGNÉ :) Tu as mis " + timer.getCounter() +  " secondes!", "Démineur", JOptionPane.PLAIN_MESSAGE);
         controller.view.dispose();
         controller = GameController.create(new Game(9, 9, 10));
     }
     
     public void lost() {
+        timer.stop();
         JOptionPane.showMessageDialog( controller.view, "PERDU :'(", "Démineur", JOptionPane.PLAIN_MESSAGE);
         controller.view.dispose();
         controller = GameController.create(new Game(9, 9, 10));
