@@ -11,6 +11,7 @@ import java.awt.GridLayout;
 import java.util.Observable;
 import java.util.Observer;
 import javax.swing.BoxLayout;
+import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -20,38 +21,57 @@ import javax.swing.JSlider;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
+import lab4.controllers.CustomGameController;
 
 /**
  *
  * @author fabien
  */
 public class GraphicalCustomGameView extends JPanel implements Observer{
-    public GraphicalCustomGameView() {
+    CustomGameController customGameController;
+    JPanel sliderPanel;
+    public GraphicalCustomGameView(CustomGameController customGameController) {
         super();
         this.setLayout(new BorderLayout());
-        
+        this.customGameController = customGameController;
         /* Radio Button Panel */
         JPanel panelRadio = new JPanel();
         panelRadio.setLayout(new BoxLayout(panelRadio, BoxLayout.PAGE_AXIS));
         
+        
+        /* Group of RadioButton so that only one button can be selected */
+        ButtonGroup radioGroup = new ButtonGroup();
+        
         /* Radio Button Beginner */
         JRadioButton beginnerRadio = new JRadioButton("Beginner : 10 mines in a 9 x 9 field");
+        beginnerRadio.setName("beginner");
         beginnerRadio.setAlignmentX(Component.LEFT_ALIGNMENT);
+        beginnerRadio.addActionListener(customGameController);
+        radioGroup.add(beginnerRadio);
         panelRadio.add(beginnerRadio);
         
         /* Radio Button Intermediaire */
         JRadioButton intermediaireRadio = new JRadioButton("Intermediaire : 40 mines in a 16 x 16 field");
+        intermediaireRadio.setName("intermediaire");
         intermediaireRadio.setAlignmentX(Component.LEFT_ALIGNMENT);
+        intermediaireRadio.addActionListener(customGameController);
+        radioGroup.add(intermediaireRadio);
         panelRadio.add(intermediaireRadio);
         
         /* Radio Button Expert */
         JRadioButton expertRadio = new JRadioButton("Expert : 90 mines in a 16 x 30 field");
+        expertRadio.setName("expert");
         expertRadio.setAlignmentX(Component.LEFT_ALIGNMENT);
+        expertRadio.addActionListener(customGameController);
+        radioGroup.add(expertRadio);
         panelRadio.add(expertRadio);
         
         /* Radio Button Custom */
         JRadioButton customRadio = new JRadioButton("Custom");
+        customRadio.setName("custom");
         customRadio.setAlignmentX(Component.LEFT_ALIGNMENT);
+        customRadio.addActionListener(customGameController);
+        radioGroup.add(customRadio);
         panelRadio.add(customRadio);
         
         
@@ -60,8 +80,8 @@ public class GraphicalCustomGameView extends JPanel implements Observer{
         
         
         /* Sliders Panel */
-        JPanel sliderPanel = new JPanel(new GridLayout(3,3,0,0));
-        
+        this.sliderPanel = new JPanel(new GridLayout(3,3,0,0));
+        sliderPanel.setName("sliderPanel");
         JTextField jinputRow = new JTextField();
         JTextField jinputColumn = new JTextField();
         JTextField jinputMines = new JTextField();
@@ -105,12 +125,22 @@ public class GraphicalCustomGameView extends JPanel implements Observer{
         sliderPanel.add(mines);
         sliderPanel.add(jinputMines);
         
+        visibleCustomPanel(false);
         /* Add to global panel at CENTER position */
         this.add(sliderPanel,BorderLayout.CENTER);
         
         /* Add validation button at SOUTH position */
-        this.add(new JButton("OK"),BorderLayout.SOUTH);
+        JButton buttonOk = new JButton("OK");
+        buttonOk.setName("buttonOk");
+        buttonOk.addActionListener(customGameController);
+        this.add(buttonOk,BorderLayout.SOUTH);
+        
     }
+    
+    public void visibleCustomPanel(boolean bool) {
+        this.sliderPanel.setVisible(bool);
+    }
+    
 
     @Override
     public void update(Observable o, Object arg) {
