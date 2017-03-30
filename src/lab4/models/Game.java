@@ -7,6 +7,8 @@ package lab4.models;
 
 import java.util.Observable;
 import java.util.Observer;
+import javax.swing.JOptionPane;
+import lab4.controllers.GameController;
 
 /**
  *
@@ -19,11 +21,23 @@ public class Game extends Observable implements Observer{
     private int height;
     private int numberOfMine;
     public Timer timer;
+    public GameController controller;
     
     public Game(int height, int width, int numberOfMine) {
         this.width = width;
         this.height = height;
         this.numberOfMine = numberOfMine;
+    }
+    
+    public void win() {
+        
+    }
+    
+    public void lost() {
+        JOptionPane d = new JOptionPane();
+        d.showMessageDialog( controller.view, "PERDU :'(", "Démineur", JOptionPane.PLAIN_MESSAGE);
+        controller.view.dispose();
+        controller = new GameController(new Game(9, 9, 10));
     }
 
     /**

@@ -29,6 +29,7 @@ public class GameController {
     public Game model;
     public GameController(Game game) {
         this.model = game;
+        this.model.controller = this;
         this.view = new GraphicalGameView("Démineur", 500, 500);
 
         MenuController menuControl = new MenuController(this);

@@ -40,14 +40,18 @@ public class Cell extends Observable {
      * @param unveil the unveil to set
      */
     public void unveil() {
+        
         this.setUnveil(true);
-         setChanged();
-         notifyObservers();
-         if(NumberOfAdjacentMines == 0) {
+        setChanged();
+        notifyObservers();
+        if(this.mine) {
+            game.lost();
+        }
+        if(NumberOfAdjacentMines == 0) {
            neighbours.forEach((neighbour) -> {
-             if(!neighbour.isUnveil()) neighbour.unveil();
-         });   
-         }
+                if(!neighbour.isUnveil()) neighbour.unveil();
+            });   
+        }
     }
     
     public void mark() {
