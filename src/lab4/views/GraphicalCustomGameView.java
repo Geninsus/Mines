@@ -25,15 +25,12 @@ import lab4.controllers.CustomGameController;
  *
  * @author fabien
  */
-<<<<<<< HEAD
 public class GraphicalCustomGameView extends JPanel implements Observer{
+    
     CustomGameController customGameController;
     JPanel sliderPanel;
+    
     public GraphicalCustomGameView(CustomGameController customGameController) {
-=======
-final public class GraphicalCustomGameView extends JPanel implements Observer{
-    public GraphicalCustomGameView() {
->>>>>>> 519f1afcfcaa77a4912d6376b574b9e519f514d3
         super();
         this.setLayout(new BorderLayout());
         this.customGameController = customGameController;

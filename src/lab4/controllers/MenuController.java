@@ -40,8 +40,7 @@ public class MenuController implements ActionListener{
                 gameController = GameController.create(new Game(16, 30, 99));
                 break;
             case "Custom":
-                
-                CustomGameController customGameController = new CustomGameController();
+                CustomGameController customGameController = new CustomGameController(gameController);
                 break;
             default:
                 break;
