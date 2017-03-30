@@ -17,12 +17,19 @@ import lab4.models.Cell;
  */
 public class GraphicalCellView extends JButton implements Observer {
     
+    static public GraphicalCellView create(GraphicalGridView grid, Cell model) {
+        GraphicalCellView graphicalCellView = new GraphicalCellView(grid, model);
+        graphicalCellView.init(grid, model);
+        return graphicalCellView;
+    }
+    
     public GraphicalCellView(GraphicalGridView grid, Cell model) {
         super("");
+    }
+    
+    private void init(GraphicalGridView grid, Cell model) {
         grid.frame.centerPanel.add(this);
-        //this.setText(String.valueOf(model.getPosition().getY()));
-        
-        
+        this.setFocusable(false);
     }
     
     public void addController(CellController controller) {
@@ -31,27 +38,33 @@ public class GraphicalCellView extends JButton implements Observer {
 
     @Override
     public void update(Observable o, Object arg) {
-        Cell model;
+        Cell cell;
         if(o instanceof Cell) {
-            model = (Cell) o;            
+            cell = (Cell) o;            
         } else {
             throw new IllegalArgumentException("Expect Cell object");
         }
         
-        if(model.isUnveil()) {
+        if(cell.isUnveil()) {
             this.setEnabled(false);
-            if(model.isMine()) {
+            if(cell.isMine()) {
                 this.setText("X"); 
-            } else if(model.getNumberOfAdjacentMines() > 0) {
-               this.setText(Integer.toString(model.getNumberOfAdjacentMines())); 
+            } else if(cell.getNumberOfAdjacentMines() > 0) {
+               this.setText(Integer.toString(cell.getNumberOfAdjacentMines())); 
             }
         } else {
-            if(model.getMarking() == '?') {
-                this.setText("?"); 
-            } else if(model.getMarking() == 'f') {
-                this.setText("f"); 
-            } else if(model.getMarking() == 'u') {
-                this.setText("");
+            switch (cell.getMarking()) {
+                case '?':
+                    this.setText("?");
+                    break;
+                case 'f':
+                    this.setText("f");
+                    break;
+                case 'u':
+                    this.setText("");
+                    break;
+                default:
+                    break;
             }
         }
     }

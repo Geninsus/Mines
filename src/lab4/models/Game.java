@@ -7,6 +7,9 @@ package lab4.models;
 
 import java.util.Observable;
 import java.util.Observer;
+import javax.swing.JOptionPane;
+import lab4.controllers.GameController;
+import lab4.exceptions.NegativeNumberException;
 
 /**
  *
@@ -14,15 +17,33 @@ import java.util.Observer;
  */
 public class Game extends Observable implements Observer{
     private int remainingMines;
+    private int remainingCells;
     private int round;
-    private int width;
-    private int height;
-    private int numberOfMine;
+    private final int width;
+    private final int height;
+    private final int numberOfMine;
+    public Timer timer;
+    public GameController controller;
     
     public Game(int height, int width, int numberOfMine) {
         this.width = width;
         this.height = height;
         this.numberOfMine = numberOfMine;
+        remainingCells = width * height;
+    }
+    
+    public void win() {
+        timer.stop();
+        JOptionPane.showMessageDialog( controller.view, "GAGNÉ :) Tu as mis " + timer.getCounter() +  " secondes!", "Démineur", JOptionPane.PLAIN_MESSAGE);
+        controller.view.dispose();
+        controller = GameController.create(new Game(9, 9, 10));
+    }
+    
+    public void lost() {
+        timer.stop();
+        JOptionPane.showMessageDialog( controller.view, "PERDU :'(", "Démineur", JOptionPane.PLAIN_MESSAGE);
+        controller.view.dispose();
+        controller = GameController.create(new Game(9, 9, 10));
     }
 
     /**
@@ -52,6 +73,14 @@ public class Game extends Observable implements Observer{
         setChanged();
         notifyObservers();
     }
+    
+    public boolean hasWin() {
+        if(remainingMines == 0 && remainingCells == getNumberOfMine()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 
     @Override
     public void update(Observable o, Object arg) {
@@ -73,10 +102,25 @@ public class Game extends Observable implements Observer{
     }
 
     /**
-     * @param round the round to set
      */
     public void incRound() {
         this.round ++;
+        if(round == 1) {
+            timer.start();
+        }
+    }
+    
+    public void decRemainingCells() throws NegativeNumberException {
+        this.remainingCells --;
+        if(this.remainingCells < 0) {
+            throw new NegativeNumberException((double)this.remainingCells);
+        }
+    }
+
+    public Game() {
+        this.width = 0;
+        this.height = 0;
+        this.numberOfMine = 0;
     }
 
     /**
@@ -96,7 +140,21 @@ public class Game extends Observable implements Observer{
     /**
      * @return the minePercentage
      */
-    public int getMinePercentage() {
+    public int getNumberOfMine() {
         return numberOfMine;
+    }
+
+    /**
+     * @return the remainingCells
+     */
+    public int getRemainingCells() {
+        return remainingCells;
+    }
+
+    /**
+     * @param remainingCells the remainingCells to set
+     */
+    public void setRemainingCells(int remainingCells) {
+        this.remainingCells = remainingCells;
     }
 }

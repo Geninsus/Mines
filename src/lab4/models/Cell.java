@@ -7,6 +7,9 @@ package lab4.models;
 
 import java.util.ArrayList;
 import java.util.Observable;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import lab4.exceptions.NegativeNumberException;
 
 /**
  *
@@ -14,7 +17,7 @@ import java.util.Observable;
  */
 public class Cell extends Observable {
 
-    private Game game;
+    private final Game game;
     private Position position;
     private char marking = 'u';
     private boolean mine;
@@ -37,33 +40,53 @@ public class Cell extends Observable {
     }
 
     /**
-     * @param unveil the unveil to set
+     * @throws lab4.exceptions.NegativeNumberException
      */
-    public void unveil() {
-        System.out.println("unveil " + this.position.getX() + " - " + this.position.getY());
+    public void unveil() throws NegativeNumberException {
         this.setUnveil(true);
-         setChanged();
-         notifyObservers();
-         if(NumberOfAdjacentMines == 0) {
+        game.decRemainingCells();
+        setChanged();
+        notifyObservers();
+        if(this.mine) {
+            game.lost();
+        }
+        if(game.hasWin()) {
+            game.win();
+        }
+        if(NumberOfAdjacentMines == 0) {
            neighbours.forEach((neighbour) -> {
-             if(!neighbour.isUnveil()) neighbour.unveil();
-         });   
-         }
+                if(!neighbour.isUnveil()) try {
+                    neighbour.unveil();
+                } catch (NegativeNumberException ex) {
+                    Logger.getLogger(Cell.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            });   
+        }
     }
     
     public void mark() {
-        if(marking == 'u') {
-            marking = 'f';
-            game.decRemainingMines();
-        } else if(marking == 'f') {
-            marking = '?';
-            game.incRemainingMines();
-        } else if(marking == '?') {
-            marking = 'u';
+        switch (marking) {
+            case 'u':
+                marking = 'f';
+                game.decRemainingMines();
+                break;
+            case 'f':
+                marking = '?';
+                game.incRemainingMines();
+                break;
+            case '?':
+                marking = 'u';
+                break;
+            default:
+                break;
         }
         setChanged();
         notifyObservers();  
+        if(game.hasWin()) {
+            game.win();
+        }
     }
+    
     /*
     public char charToDisplay() {
         if(visible) {

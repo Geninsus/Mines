@@ -13,12 +13,10 @@ import java.util.Observer;
 import javax.swing.BoxLayout;
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JSlider;
-import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import lab4.controllers.CustomGameController;
@@ -27,10 +25,15 @@ import lab4.controllers.CustomGameController;
  *
  * @author fabien
  */
+<<<<<<< HEAD
 public class GraphicalCustomGameView extends JPanel implements Observer{
     CustomGameController customGameController;
     JPanel sliderPanel;
     public GraphicalCustomGameView(CustomGameController customGameController) {
+=======
+final public class GraphicalCustomGameView extends JPanel implements Observer{
+    public GraphicalCustomGameView() {
+>>>>>>> 519f1afcfcaa77a4912d6376b574b9e519f514d3
         super();
         this.setLayout(new BorderLayout());
         this.customGameController = customGameController;

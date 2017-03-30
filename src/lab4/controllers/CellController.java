@@ -7,6 +7,9 @@ package lab4.controllers;
 
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import lab4.exceptions.NegativeNumberException;
 import lab4.models.Cell;
 import lab4.views.GraphicalCellView;
 
@@ -16,14 +19,14 @@ import lab4.views.GraphicalCellView;
  */
 public class CellController extends MouseAdapter {
     
-    private GridController gridController;
-    private Cell model;
-    private GraphicalCellView view;
+    private final GridController gridController;
+    private final Cell model;
+    private final GraphicalCellView view;
     
     public CellController(GridController gridController,Cell model){
         this.gridController = gridController;
         this.model = model;
-        this.view = new GraphicalCellView(gridController.getView(), model);
+        this.view = GraphicalCellView.create(gridController.getView(), model);
         view.addController(this);
         model.addObserver(view);  
     }
@@ -31,15 +34,19 @@ public class CellController extends MouseAdapter {
     @Override
     public void mouseClicked(MouseEvent e){
         /* Clique gauche */
-        if(e.getButton() == 1) {
+        if(e.getButton() == 1 && model.isUnveil() == false) {
             model.setUnveil(true);
             gridController.game.model.incRound();
             if(gridController.game.model.getRound() == 1) {
                 gridController.model.generateMines();
             }
-            model.unveil();
-            
-        /* Clique droit */
+            try {
+                model.unveil();
+                
+                /* Clique droit */
+            } catch (NegativeNumberException ex) {
+                Logger.getLogger(CellController.class.getName()).log(Level.SEVERE, null, ex);
+            }
         } else if(e.getButton() == 3) {
             model.mark();
         }

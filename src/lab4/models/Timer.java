@@ -32,7 +32,7 @@ public class Timer extends Observable {
     
     public void start() {
        counter = 0;
-       this.timer.schedule(new TimerTask(), 1000);
+       this.timer.schedule(new TimerTask(), 1000, 1000);
     }
     
     public void stop() {

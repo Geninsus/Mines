@@ -18,7 +18,7 @@ import lab4.exceptions.TooManyMinesException;
  */
 public class Grid extends Observable implements Observer{
 
-    private ArrayList<ArrayList<Cell>> grid = new ArrayList<ArrayList<Cell>>();
+    private final ArrayList<ArrayList<Cell>> grid = new ArrayList<>();
     private Game game;
     private int width;
     private int height;
@@ -54,7 +54,7 @@ public class Grid extends Observable implements Observer{
         
         /* Remplissage de la grille */
         for (int y = 0; y < height; y++) {
-            this.grid.add(new ArrayList<Cell>());
+            this.grid.add(new ArrayList<>());
             for (int x = 0; x < width; x++) {
                 this.grid.get(y).add(new Cell(game, new Position(y, x)));
             }

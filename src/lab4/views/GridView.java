@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
 import java.util.Scanner;
-import lab4.controllers.GridController;
 import lab4.models.Cell;
 import lab4.models.Grid;
 
@@ -19,8 +18,7 @@ import lab4.models.Grid;
  */
 public class GridView implements Observer{
     
-    private Grid model;
-    private GridController controller;
+    private final Grid model;
     
     public GridView(Grid model) {
         this.model = model;
@@ -69,12 +67,5 @@ public class GridView implements Observer{
     public void wrongParameters() {
         System.out.println("Paramètre invalide, merci de réessayer:");
         userInput();
-    }
-    
-    /**
-     * @param controller the controller to set
-     */
-    public void setController(GridController controller) {
-        this.controller = controller;
     }
 }
