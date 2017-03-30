@@ -9,6 +9,7 @@ import java.util.Observable;
 import java.util.Observer;
 import javax.swing.JOptionPane;
 import lab4.controllers.GameController;
+import lab4.exceptions.NegativeNumberException;
 
 /**
  *
@@ -16,6 +17,7 @@ import lab4.controllers.GameController;
  */
 public class Game extends Observable implements Observer{
     private int remainingMines;
+    private int remainingCells;
     private int round;
     private final int width;
     private final int height;
@@ -27,10 +29,13 @@ public class Game extends Observable implements Observer{
         this.width = width;
         this.height = height;
         this.numberOfMine = numberOfMine;
+        remainingCells = width * height;
     }
     
     public void win() {
-        
+        JOptionPane.showMessageDialog( controller.view, "GAGNÉ :)", "Démineur", JOptionPane.PLAIN_MESSAGE);
+        controller.view.dispose();
+        controller = GameController.create(new Game(9, 9, 10));
     }
     
     public void lost() {
@@ -66,6 +71,14 @@ public class Game extends Observable implements Observer{
         setChanged();
         notifyObservers();
     }
+    
+    public boolean hasWin() {
+        if(remainingMines == 0 && remainingCells == getNumberOfMine()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 
     @Override
     public void update(Observable o, Object arg) {
@@ -94,6 +107,19 @@ public class Game extends Observable implements Observer{
             timer.start();
         }
     }
+    
+    public void decRemainingCells() throws NegativeNumberException {
+        this.remainingCells --;
+        if(this.remainingCells < 0) {
+            throw new NegativeNumberException((double)this.remainingCells);
+        }
+    }
+
+    public Game() {
+        this.width = 0;
+        this.height = 0;
+        this.numberOfMine = 0;
+    }
 
     /**
      * @return the width
@@ -112,7 +138,21 @@ public class Game extends Observable implements Observer{
     /**
      * @return the minePercentage
      */
-    public int getMinePercentage() {
+    public int getNumberOfMine() {
         return numberOfMine;
+    }
+
+    /**
+     * @return the remainingCells
+     */
+    public int getRemainingCells() {
+        return remainingCells;
+    }
+
+    /**
+     * @param remainingCells the remainingCells to set
+     */
+    public void setRemainingCells(int remainingCells) {
+        this.remainingCells = remainingCells;
     }
 }

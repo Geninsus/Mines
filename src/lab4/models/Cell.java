@@ -7,6 +7,9 @@ package lab4.models;
 
 import java.util.ArrayList;
 import java.util.Observable;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import lab4.exceptions.NegativeNumberException;
 
 /**
  *
@@ -37,18 +40,26 @@ public class Cell extends Observable {
     }
 
     /**
+     * @throws lab4.exceptions.NegativeNumberException
      */
-    public void unveil() {
-        
+    public void unveil() throws NegativeNumberException {
         this.setUnveil(true);
+        game.decRemainingCells();
         setChanged();
         notifyObservers();
         if(this.mine) {
             game.lost();
         }
+        if(game.hasWin()) {
+            game.win();
+        }
         if(NumberOfAdjacentMines == 0) {
            neighbours.forEach((neighbour) -> {
-                if(!neighbour.isUnveil()) neighbour.unveil();
+                if(!neighbour.isUnveil()) try {
+                    neighbour.unveil();
+                } catch (NegativeNumberException ex) {
+                    Logger.getLogger(Cell.class.getName()).log(Level.SEVERE, null, ex);
+                }
             });   
         }
     }
@@ -71,7 +82,11 @@ public class Cell extends Observable {
         }
         setChanged();
         notifyObservers();  
+        if(game.hasWin()) {
+            game.win();
+        }
     }
+    
     /*
     public char charToDisplay() {
         if(visible) {

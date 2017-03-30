@@ -55,7 +55,7 @@ public class GameController {
         /* Création du model Grid */
         Grid gridModel = null;
         try {
-            gridModel = new Grid(model, model.getHeight(), model.getWidth(), model.getMinePercentage());
+            gridModel = new Grid(model, model.getHeight(), model.getWidth(), model.getNumberOfMine());
         } catch (NegativeLengthException | NegativeNumberException | TooManyMinesException ex) {
             Logger.getLogger(Lab4.class.getName()).log(Level.SEVERE, null, ex);
         }

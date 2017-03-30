@@ -3,20 +3,11 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/Users/fabien/Documents/Java/tp/lab4/src/lab4/models/Cell.java</file>
-            <file>file:/Users/fabien/Documents/Java/tp/lab4/src/lab4/views/GridView.java</file>
-            <file>file:/Users/fabien/Documents/Java/tp/lab4/src/lab4/models/Grid.java</file>
-            <file>file:/Users/fabien/Documents/Java/tp/lab4/src/lab4/views/GraphicalCustomGameView.java</file>
-            <file>file:/Users/fabien/Documents/Java/tp/lab4/src/lab4/controllers/CellController.java</file>
-            <file>file:/Users/fabien/Documents/Java/tp/lab4/src/lab4/controllers/GridController.java</file>
-            <file>file:/Users/fabien/Documents/Java/tp/lab4/src/lab4/models/Timer.java</file>
-            <file>file:/Users/fabien/Documents/Java/tp/lab4/src/lab4/controllers/CustomGameController.java</file>
-            <file>file:/Users/fabien/Documents/Java/tp/lab4/src/lab4/views/GraphicalMenuView.java</file>
-            <file>file:/Users/fabien/Documents/Java/tp/lab4/src/lab4/controllers/GameController.java</file>
             <file>file:/Users/fabien/Documents/Java/tp/lab4/src/lab4/models/Game.java</file>
+            <file>file:/Users/fabien/Documents/Java/tp/lab4/src/lab4/controllers/GameController.java</file>
             <file>file:/Users/fabien/Documents/Java/tp/lab4/src/lab4/controllers/MenuController.java</file>
-            <file>file:/Users/fabien/Documents/Java/tp/lab4/src/lab4/views/GraphicalGameView.java</file>
-            <file>file:/Users/fabien/Documents/Java/tp/lab4/src/lab4/views/GraphicalCellView.java</file>
+            <file>file:/Users/fabien/Documents/Java/tp/lab4/src/lab4/views/GridView.java</file>
+            <file>file:/Users/fabien/Documents/Java/tp/lab4/src/lab4/controllers/GridController.java</file>
         </group>
     </open-files>
 </project-private>
