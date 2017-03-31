@@ -44,7 +44,7 @@ public class MenuController implements ActionListener{
                 gameController.model.difficulty = Difficulty.EXPERT;
                 break;
             case "Custom":
-                CustomGameController customGameController = new CustomGameController();
+                CustomGameController customGameController = new CustomGameController(gameController);
                 break;
             default:
                 break;
