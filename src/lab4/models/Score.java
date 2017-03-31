@@ -13,12 +13,12 @@ import java.util.Date;
  * @author fabien
  */
 public class Score implements Serializable{
-    int difficulty;
+    Difficulty difficulty;
     int score;
     Date date;
-    public Score(int score) {
+    public Score(Difficulty difficulty,  int score) {
         this.score = score;
         this.date = new Date();
-        //this.difficulty = difficulty;
+        this.difficulty = difficulty;
     }
 }

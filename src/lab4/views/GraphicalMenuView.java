@@ -23,8 +23,8 @@ public class GraphicalMenuView extends JMenuBar{
         super();
         JMenu menu = new JMenu("Game");
         menu.setMnemonic(KeyEvent.VK_G);
-        menu.getAccessibleContext().setAccessibleDescription("Descriptions");
         this.add(menu);
+   
         JMenu submenu = new JMenu("New");
         submenu.setMnemonic(KeyEvent.VK_N);
         
@@ -32,28 +32,33 @@ public class GraphicalMenuView extends JMenuBar{
         menuItem.setMnemonic(KeyEvent.VK_B);
         menuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_B,ActionEvent.CTRL_MASK));
         menuItem.addActionListener(menuController);
-        
-        
         submenu.add(menuItem);
+        
         menuItem = new JMenuItem("Intermediaire");
         menuItem.setMnemonic(KeyEvent.VK_I);
         menuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_I,ActionEvent.CTRL_MASK));
         menuItem.addActionListener(menuController);
-        
         submenu.add(menuItem);
+        
         menuItem = new JMenuItem("Expert");
         menuItem.setMnemonic(KeyEvent.VK_E);
         menuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_E,ActionEvent.CTRL_MASK));
-        menuItem.addActionListener(menuController);
-        
+        menuItem.addActionListener(menuController);  
         submenu.add(menuItem);
+        
         menuItem = new JMenuItem("Custom");
         menuItem.setMnemonic(KeyEvent.VK_C);
         menuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_C,ActionEvent.CTRL_MASK));
         menuItem.addActionListener(menuController);
-        
         submenu.add(menuItem);
+        
         menu.add(submenu);
+        
+        JMenuItem score = new JMenuItem("Score");
+        score.setMnemonic(KeyEvent.VK_S);
+        score.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S,ActionEvent.CTRL_MASK));
+        score.addActionListener(menuController);
+        menu.add(score);
         
         menu.addSeparator();
         

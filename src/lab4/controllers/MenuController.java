@@ -46,6 +46,9 @@ public class MenuController implements ActionListener{
             case "Custom":
                 CustomGameController customGameController = new CustomGameController(gameController);
                 break;
+            case "Score":
+                System.out.println("lab4.controllers.MenuController.actionPerformed()");
+                break;
             default:
                 break;
         }
