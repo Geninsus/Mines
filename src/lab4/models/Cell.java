@@ -5,6 +5,7 @@
  */
 package lab4.models;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Observable;
 import java.util.logging.Level;
@@ -42,7 +43,7 @@ public class Cell extends Observable {
     /**
      * @throws lab4.exceptions.NegativeNumberException
      */
-    public void unveil() throws NegativeNumberException {
+    public void unveil() throws NegativeNumberException, IOException {
         this.setUnveil(true);
         game.decRemainingCells();
         setChanged();
@@ -57,14 +58,14 @@ public class Cell extends Observable {
            neighbours.forEach((neighbour) -> {
                 if(!neighbour.isUnveil()) try {
                     neighbour.unveil();
-                } catch (NegativeNumberException ex) {
+                } catch (NegativeNumberException | IOException ex) {
                     Logger.getLogger(Cell.class.getName()).log(Level.SEVERE, null, ex);
                 }
             });   
         }
     }
     
-    public void mark() {
+    public void mark() throws IOException {
         switch (marking) {
             case 'u':
                 marking = 'f';

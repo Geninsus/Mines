@@ -7,6 +7,7 @@ package lab4.controllers;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import lab4.models.Difficulty;
 import lab4.models.Game;
 
 /**
@@ -30,17 +31,19 @@ public class MenuController implements ActionListener{
             case "Beginner":
                 gameController.view.dispose();
                 gameController = GameController.create(new Game(9, 9, 10));
+                gameController.model.difficulty = Difficulty.BEGINER;
                 break;
             case "Intermediaire":
                 gameController.view.dispose();
                 gameController = GameController.create(new Game(16, 16, 40));
+                gameController.model.difficulty = Difficulty.INTERMEDIAIRE;
                 break;
             case "Expert":
                 gameController.view.dispose();
                 gameController = GameController.create(new Game(16, 30, 99));
+                gameController.model.difficulty = Difficulty.EXPERT;
                 break;
             case "Custom":
-                
                 CustomGameController customGameController = new CustomGameController();
                 break;
             default:
