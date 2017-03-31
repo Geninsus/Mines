@@ -41,7 +41,7 @@ public class Game extends Observable implements Observer{
         Score score = new Score(difficulty, timer.getCounter());
         try{
             ObjectOutputStream objectOutputStream = new ObjectOutputStream(
-                new FileOutputStream("scrore.ser")); objectOutputStream.writeObject(score);
+                new FileOutputStream("score.ser")); objectOutputStream.writeObject(score);
         } catch(IOException ioException){
             throw new IOException(ioException);
         }

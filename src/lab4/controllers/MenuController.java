@@ -7,8 +7,12 @@ package lab4.controllers;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
 import lab4.models.Difficulty;
 import lab4.models.Game;
+import lab4.models.Score;
 
 /**
  *
@@ -47,7 +51,15 @@ public class MenuController implements ActionListener{
                 CustomGameController customGameController = new CustomGameController(gameController);
                 break;
             case "Score":
-                System.out.println("lab4.controllers.MenuController.actionPerformed()");
+                Score score = null;
+                try{
+                    ObjectInputStream objectInputStream = new ObjectInputStream(new FileInputStream("score.ser"));
+                score = (Score) objectInputStream.readObject();
+                    System.out.println("data loaded:" + score);
+                }
+                catch(IOException | ClassNotFoundException ioException){
+                    System.err.println(ioException);
+                }
                 break;
             default:
                 break;
