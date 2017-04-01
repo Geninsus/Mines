@@ -16,6 +16,12 @@ import lab4.exceptions.NegativeNumberException;
  * @author fabien
  */
 public class Game extends Observable implements Observer{
+    
+    public final static int MINIMUMROWS = 9;
+    public final static int MINIMUMCOLUMNS = 9;
+    public final static int MAXIMUMROWS = 9;
+    public final static int MAXIMUMCOLUMNS = 9;
+    
     private int remainingMines;
     private int remainingCells;
     private int round;

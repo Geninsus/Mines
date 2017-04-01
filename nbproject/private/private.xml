@@ -2,17 +2,6 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group>
-<<<<<<< HEAD
-            <file>file:/C:/Users/Guillaume/Documents/Boulot/Mines/src/lab4/controllers/CustomGameController.java</file>
-            <file>file:/C:/Users/Guillaume/Documents/Boulot/Mines/src/lab4/views/GraphicalCustomGameView.java</file>
-=======
-            <file>file:/Users/fabien/Documents/Java/tp/lab4/src/lab4/models/Game.java</file>
-            <file>file:/Users/fabien/Documents/Java/tp/lab4/src/lab4/controllers/GameController.java</file>
-            <file>file:/Users/fabien/Documents/Java/tp/lab4/src/lab4/controllers/MenuController.java</file>
-            <file>file:/Users/fabien/Documents/Java/tp/lab4/src/lab4/views/GridView.java</file>
-            <file>file:/Users/fabien/Documents/Java/tp/lab4/src/lab4/controllers/GridController.java</file>
->>>>>>> 519f1afcfcaa77a4912d6376b574b9e519f514d3
-        </group>
+        <group/>
     </open-files>
 </project-private>

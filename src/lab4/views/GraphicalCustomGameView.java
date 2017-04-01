@@ -8,11 +8,14 @@ package lab4.views;
 import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.GridLayout;
+import java.text.DecimalFormat;
+import java.text.ParseException;
 import java.util.Observable;
 import java.util.Observer;
 import javax.swing.BoxLayout;
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
+import javax.swing.JFormattedTextField;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
@@ -20,15 +23,22 @@ import javax.swing.JSlider;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import lab4.controllers.CustomGameController;
+import lab4.models.Game;
 
 /**
  *
  * @author fabien
  */
 public class GraphicalCustomGameView extends JPanel implements Observer{
+
+    
     
     CustomGameController customGameController;
     JPanel sliderPanel;
+    private JFormattedTextField jinputMines,jinputColumn,jinputRow;
+    private JRadioButton customRadio;
+    private JSlider sliderMines,sliderColumns,sliderRows;
+    
     
     public GraphicalCustomGameView(CustomGameController customGameController) {
         super();
@@ -67,7 +77,7 @@ public class GraphicalCustomGameView extends JPanel implements Observer{
         panelRadio.add(expertRadio);
         
         /* Radio Button Custom */
-        JRadioButton customRadio = new JRadioButton("Custom");
+        this.customRadio = new JRadioButton("Custom");
         customRadio.setName("custom");
         customRadio.setAlignmentX(Component.LEFT_ALIGNMENT);
         customRadio.addActionListener(customGameController);
@@ -80,50 +90,61 @@ public class GraphicalCustomGameView extends JPanel implements Observer{
         
         
         /* Sliders Panel */
+        
+        /* Input texteFields */
         this.sliderPanel = new JPanel(new GridLayout(3,3,0,0));
         sliderPanel.setName("sliderPanel");
-        JTextField jinputRow = new JTextField();
-        JTextField jinputColumn = new JTextField();
-        JTextField jinputMines = new JTextField();
+         
+        this.jinputRow = new JFormattedTextField(new DecimalFormat("##"));
+        this.jinputRow.setName("jinputRow");
+        this.jinputRow.addActionListener(customGameController);
+        this.jinputColumn = new JFormattedTextField(new DecimalFormat("##"));
+        this.jinputColumn.setName("jinputColumn");
+        this.jinputColumn.addActionListener(customGameController);
+        this.jinputMines = new JFormattedTextField(new DecimalFormat("##"));
+        this.jinputMines.setName("jinputMines");
+        this.jinputMines.addActionListener(customGameController);
         
-        JSlider rows = new JSlider(JSlider.HORIZONTAL,9, 23, 9);
-        rows.setMajorTickSpacing(2);
-        rows.setMinorTickSpacing(1);
-        rows.setPaintTicks(true);
-        rows.setPaintLabels(true);
         
-        JSlider columns = new JSlider(JSlider.HORIZONTAL, 9, 29, 19);
-        columns.setMajorTickSpacing(4);
-        columns.setMinorTickSpacing(2);
-        columns.setPaintTicks(true);
-        columns.setPaintLabels(true);
+        /* Sliders */
+        this.sliderRows = new JSlider(JSlider.HORIZONTAL,9, 23, 9);
+        this.sliderRows.setMajorTickSpacing(2);
+        this.sliderRows.setMinorTickSpacing(1);
+        this.sliderRows.setPaintTicks(true);
+        this.sliderRows.setPaintLabels(true);
         
-        JSlider mines = new JSlider(JSlider.HORIZONTAL, 9, 139, 76);
-        mines.setMajorTickSpacing(26);
-        mines.setMinorTickSpacing(13);
-        mines.setPaintTicks(true);
-        mines.setPaintLabels(true);
+        this.sliderColumns = new JSlider(JSlider.HORIZONTAL, 9, 29, 19);
+        this.sliderColumns.setMajorTickSpacing(4);
+        this.sliderColumns.setMinorTickSpacing(2);
+        this.sliderColumns.setPaintTicks(true);
+        this.sliderColumns.setPaintLabels(true);
+        
+        this.sliderMines = new JSlider(JSlider.HORIZONTAL, 9, 139, 76);
+        this.sliderMines.setMajorTickSpacing(26);
+        this.sliderMines.setMinorTickSpacing(13);
+        this.sliderMines.setPaintTicks(true);
+        this.sliderMines.setPaintLabels(true);
         
         JLabel labelText = new JLabel("Rows");
         labelText.setHorizontalAlignment(SwingConstants.CENTER);
         
         sliderPanel.add(labelText);
-        sliderPanel.add(rows);
-        sliderPanel.add(jinputRow);
+        sliderPanel.add(this.sliderRows);
+        sliderPanel.add(this.jinputRow);
         
         labelText = new JLabel("Columns");
         labelText.setHorizontalAlignment(SwingConstants.CENTER);
         
         sliderPanel.add(labelText);
-        sliderPanel.add(columns);
-        sliderPanel.add(jinputColumn);
+        sliderPanel.add(this.sliderColumns);
+        sliderPanel.add(this.jinputColumn);
         
         labelText = new JLabel("Mines");
         labelText.setHorizontalAlignment(SwingConstants.CENTER);
         
         sliderPanel.add(labelText);
-        sliderPanel.add(mines);
-        sliderPanel.add(jinputMines);
+        sliderPanel.add(this.sliderMines);
+        sliderPanel.add(this.jinputMines);
         
         visibleCustomPanel(false);
         /* Add to global panel at CENTER position */
@@ -134,7 +155,6 @@ public class GraphicalCustomGameView extends JPanel implements Observer{
         buttonOk.setName("buttonOk");
         buttonOk.addActionListener(customGameController);
         this.add(buttonOk,BorderLayout.SOUTH);
-        
     }
     
     public void visibleCustomPanel(boolean bool) {
@@ -145,5 +165,71 @@ public class GraphicalCustomGameView extends JPanel implements Observer{
     @Override
     public void update(Observable o, Object arg) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    /**
+     * @return the customRadio
+     */
+    public JRadioButton getCustomRadio() {
+        return customRadio;
+    }
+    
+    /**
+     * @return the sliderMines
+     */
+    public JSlider getSliderMines() {
+        return sliderMines;
+    }
+
+    /**
+     * @return the sliderColumns
+     */
+    public JSlider getSliderColumns() {
+        return sliderColumns;
+    }
+
+    /**
+     * @return the sliderRows
+     */
+    public JSlider getSliderRows() {
+        return sliderRows;
+    }
+
+    /**
+     * @return the jinputRow
+     */
+    public int getJinputRow() {
+        Number num = (Number)this.jinputRow.getValue();
+        if (num.intValue() < Game.MINIMUMROWS) {
+            return Game.MINIMUMROWS;
+        }else if(num.intValue() > Game.MAXIMUMROWS){
+            return Game.MAXIMUMROWS;
+        }else{
+            return num.intValue();
+        }
+    }
+
+    /**
+     * @return the jinputColumn
+     */
+    public int getJinputColumn() {
+        Number num = (Number)this.jinputRow.getValue();
+        if (num.intValue() < Game.MINIMUMCOLUMNS) {
+            return Game.MINIMUMCOLUMNS;
+        }else if(num.intValue() > Game.MAXIMUMCOLUMNS){
+            return Game.MAXIMUMCOLUMNS;
+        }else{
+            return num.intValue();
+        }
+    }
+
+    /**
+     * @return the jinputMines
+     */
+    public int getJinputMines() {
+                
+        Number num = (Number)this.jinputMines.getValue();
+        
+        return num.intValue();
     }
 }

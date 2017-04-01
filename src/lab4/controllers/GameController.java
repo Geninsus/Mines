@@ -25,6 +25,7 @@ import lab4.views.GraphicalTimerView;
  * @author fabien
  */
 public class GameController {
+    
     public GraphicalGameView view;
     public Game model;
     

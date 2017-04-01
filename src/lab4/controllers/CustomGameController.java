@@ -11,6 +11,7 @@ import java.awt.event.ActionListener;
 import javafx.beans.InvalidationListener;
 import javafx.beans.Observable;
 import javax.swing.JButton;
+import javax.swing.JFormattedTextField;
 import javax.swing.JFrame;
 import javax.swing.JRadioButton;
 import lab4.models.Game;
@@ -22,9 +23,9 @@ import lab4.views.GraphicalCustomGameView;
  */
 public class CustomGameController implements Observable,ActionListener{
     
-    GraphicalCustomGameView customGameView;
-    JFrame customFrame;
-    GameController gameController;
+    private GraphicalCustomGameView customGameView;
+    private JFrame customFrame;
+    public GameController gameController;
     
     private int row,column,mines;
     
@@ -40,6 +41,11 @@ public class CustomGameController implements Observable,ActionListener{
     }
     
     private void createCustomGame() {
+        if(this.customGameView.getCustomRadio().isSelected()){
+            this.column = customGameView.getJinputColumn();
+            this.row = customGameView.getJinputRow();
+            this.mines = customGameView.getJinputMines();
+        }
          this.gameController = GameController.create(new Game(this.row, this.column, this.mines));
     }
     @Override
@@ -95,6 +101,26 @@ public class CustomGameController implements Observable,ActionListener{
                 this.createCustomGame();
             }
 
+        }
+        if(e.getSource().getClass() == JFormattedTextField.class){
+            JFormattedTextField textField = (JFormattedTextField)e.getSource();
+            switch(textField.getName()){
+                case "jinputMines":
+                    this.customGameView.getSliderMines().setValue(this.customGameView.getJinputMines());
+                    System.err.println("jinputMines");
+                    break;
+                case "jinputRow":
+                    this.customGameView.getJinputColumn();
+                    this.customGameView.getSliderRows().setValue(15);
+                    System.err.println("jinputRow");
+                    break;
+                case "jinputColumn":
+                    this.customGameView.getSliderColumns().setValue(this.customGameView.getJinputColumn());
+                    System.err.println("jinputColumn");
+                    break;
+                default:
+                    break;
+            }
         }
     }
     
