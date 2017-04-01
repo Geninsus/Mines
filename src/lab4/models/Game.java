@@ -22,8 +22,8 @@ public class Game extends Observable implements Observer{
     
     public final static int MINIMUMROWS = 9;
     public final static int MINIMUMCOLUMNS = 9;
-    public final static int MAXIMUMROWS = 9;
-    public final static int MAXIMUMCOLUMNS = 9;
+    public final static int MAXIMUMROWS = 23;
+    public final static int MAXIMUMCOLUMNS = 29;
     
     private int remainingMines;
     private int remainingCells;
