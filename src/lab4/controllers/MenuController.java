@@ -7,9 +7,11 @@ package lab4.controllers;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.EOFException;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
+import java.util.ArrayList;
 import lab4.models.Difficulty;
 import lab4.models.Game;
 import lab4.models.Score;
@@ -51,16 +53,29 @@ public class MenuController implements ActionListener{
                 CustomGameController customGameController = new CustomGameController(gameController);
                 break;
             case "Score":
+                HighScoreController highScoreController = new HighScoreController(gameController);
+                break;
+                /*
+                
                 Score score = null;
                 try{
                     ObjectInputStream objectInputStream = new ObjectInputStream(new FileInputStream("score.ser"));
-                score = (Score) objectInputStream.readObject();
-                    System.out.println("data loaded:" + score);
+                    ArrayList<Score> scores;
+                    while(true) {
+                        try {
+                           score = (Score) objectInputStream.readObject();
+                            System.out.println("data loaded:" + score.getScore()); 
+                        } catch (IOException | ClassNotFoundException ex) {
+                            break;
+                        }
+                    }
                 }
-                catch(IOException | ClassNotFoundException ioException){
+                catch(IOException ioException){
                     System.err.println(ioException);
                 }
-                break;
+
+                */
+                
             default:
                 break;
         }

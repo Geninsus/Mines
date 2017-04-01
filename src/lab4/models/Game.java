@@ -5,6 +5,7 @@
  */
 package lab4.models;
 
+import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
@@ -13,6 +14,7 @@ import java.util.Observer;
 import javax.swing.JOptionPane;
 import lab4.controllers.GameController;
 import lab4.exceptions.NegativeNumberException;
+import lab4.fileManager.AppendingObjectOutputStream;
 
 /**
  *
@@ -45,23 +47,44 @@ public class Game extends Observable implements Observer{
     public void win() throws IOException {
         timer.stop();
         Score score = new Score(difficulty, timer.getCounter());
-        try{
-            ObjectOutputStream objectOutputStream = new ObjectOutputStream(
-                new FileOutputStream("score.ser")); objectOutputStream.writeObject(score);
+        
+        
+        /*try{
+            File file = new File("score.ser");
+            file.createNewFile();
+            ObjectOutputStream objectOutputStream = new ObjectOutputStream(new FileOutputStream(file, true));
+            objectOutputStream.writeObject(score);
         } catch(IOException ioException){
             throw new IOException(ioException);
         }
-        
+        */
         JOptionPane.showMessageDialog( controller.view, "GAGNÉ :) Tu as mis " + timer.getCounter() +  " secondes!", "Démineur", JOptionPane.PLAIN_MESSAGE);
         controller.view.dispose();
         controller = GameController.create(new Game(9, 9, 10));
+        controller.model.difficulty = Difficulty.BEGINER;
     }
     
-    public void lost() {
+    public void lost() throws IOException {
         timer.stop();
+        
+        Score score = new Score(difficulty, timer.getCounter());
+        
+        
+        File file = new File("score.ser");
+        ObjectOutputStream objectOutputStream;
+        if(file.createNewFile()) {
+           objectOutputStream = new ObjectOutputStream(new FileOutputStream(file, true)); 
+        } else {
+           objectOutputStream = new AppendingObjectOutputStream(new FileOutputStream(file, true)); 
+        }
+        
+        objectOutputStream.writeObject(score);
+        objectOutputStream.close();
+        
         JOptionPane.showMessageDialog( controller.view, "PERDU :'(", "Démineur", JOptionPane.PLAIN_MESSAGE);
         controller.view.dispose();
         controller = GameController.create(new Game(9, 9, 10));
+        controller.model.difficulty = Difficulty.BEGINER;
     }
 
     /**

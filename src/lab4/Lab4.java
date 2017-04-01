@@ -6,6 +6,7 @@
 package lab4;
 
 import lab4.controllers.GameController;
+import lab4.models.Difficulty;
 import lab4.models.Game;
 
 /**
@@ -19,6 +20,7 @@ public class Lab4 {
      */
     public static void main(String[] args) {
         GameController gameController = GameController.create(new Game(9, 9, 10));
+        gameController.model.difficulty = Difficulty.BEGINER;
     }
     
 }
