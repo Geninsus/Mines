@@ -50,19 +50,19 @@ public class GraphicalHighScoreView  extends JPanel {
        
         for(int i = 0; i < MAX_SCORES_DISPLAY; i++) {
             if(beginerScores.size() > i) {
-               this.add(new JLabel(String.valueOf(beginerScores.get(i).getScore()))); 
+               this.add(new JLabel(String.valueOf(beginerScores.get(i).getScore()) + " sec")); 
             } else {
                 this.add(new JLabel("")); 
             }
             
             if(IntermediaireScores.size() > i) {
-               this.add(new JLabel(String.valueOf(IntermediaireScores.get(i).getScore()))); 
+               this.add(new JLabel(String.valueOf(IntermediaireScores.get(i).getScore()) + " sec")); 
             } else {
                 this.add(new JLabel("")); 
             }
             
             if(expertScores.size() > i) {
-               this.add(new JLabel(String.valueOf(expertScores.get(i).getScore()))); 
+               this.add(new JLabel(String.valueOf(expertScores.get(i).getScore()) + " sec")); 
             } else {
                 this.add(new JLabel("")); 
             }

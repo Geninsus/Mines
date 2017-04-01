@@ -46,29 +46,8 @@ public class Game extends Observable implements Observer{
     
     public void win() throws IOException {
         timer.stop();
-        Score score = new Score(difficulty, timer.getCounter());
-        
-        
-        /*try{
-            File file = new File("score.ser");
-            file.createNewFile();
-            ObjectOutputStream objectOutputStream = new ObjectOutputStream(new FileOutputStream(file, true));
-            objectOutputStream.writeObject(score);
-        } catch(IOException ioException){
-            throw new IOException(ioException);
-        }
-        */
-        JOptionPane.showMessageDialog( controller.view, "GAGNÉ :) Tu as mis " + timer.getCounter() +  " secondes!", "Démineur", JOptionPane.PLAIN_MESSAGE);
-        controller.view.dispose();
-        controller = GameController.create(new Game(9, 9, 10));
-        controller.model.difficulty = Difficulty.BEGINER;
-    }
-    
-    public void lost() throws IOException {
-        timer.stop();
         
         Score score = new Score(difficulty, timer.getCounter());
-        
         
         File file = new File("score.ser");
         ObjectOutputStream objectOutputStream;
@@ -81,6 +60,14 @@ public class Game extends Observable implements Observer{
         objectOutputStream.writeObject(score);
         objectOutputStream.close();
         
+        JOptionPane.showMessageDialog( controller.view, "GAGNÉ :) Tu as mis " + timer.getCounter() +  " secondes!", "Démineur", JOptionPane.PLAIN_MESSAGE);
+        controller.view.dispose();
+        controller = GameController.create(new Game(9, 9, 10));
+        controller.model.difficulty = Difficulty.BEGINER;
+    }
+    
+    public void lost() {
+        timer.stop();
         JOptionPane.showMessageDialog( controller.view, "PERDU :'(", "Démineur", JOptionPane.PLAIN_MESSAGE);
         controller.view.dispose();
         controller = GameController.create(new Game(9, 9, 10));
