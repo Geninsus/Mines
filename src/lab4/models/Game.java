@@ -5,6 +5,9 @@
  */
 package lab4.models;
 
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.util.Observable;
 import java.util.Observer;
 import javax.swing.JOptionPane;
@@ -30,6 +33,7 @@ public class Game extends Observable implements Observer{
     private final int numberOfMine;
     public Timer timer;
     public GameController controller;
+    public Difficulty difficulty = Difficulty.CUSTOM;
     
     public Game(int height, int width, int numberOfMine) {
         this.width = width;
@@ -38,8 +42,16 @@ public class Game extends Observable implements Observer{
         remainingCells = width * height;
     }
     
-    public void win() {
+    public void win() throws IOException {
         timer.stop();
+        Score score = new Score(difficulty, timer.getCounter());
+        try{
+            ObjectOutputStream objectOutputStream = new ObjectOutputStream(
+                new FileOutputStream("score.ser")); objectOutputStream.writeObject(score);
+        } catch(IOException ioException){
+            throw new IOException(ioException);
+        }
+        
         JOptionPane.showMessageDialog( controller.view, "GAGNÉ :) Tu as mis " + timer.getCounter() +  " secondes!", "Démineur", JOptionPane.PLAIN_MESSAGE);
         controller.view.dispose();
         controller = GameController.create(new Game(9, 9, 10));

@@ -7,6 +7,7 @@ package lab4.controllers;
 
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import lab4.exceptions.NegativeNumberException;
@@ -44,11 +45,15 @@ public class CellController extends MouseAdapter {
                 model.unveil();
                 
                 /* Clique droit */
-            } catch (NegativeNumberException ex) {
+            } catch (NegativeNumberException | IOException ex) {
                 Logger.getLogger(CellController.class.getName()).log(Level.SEVERE, null, ex);
             }
         } else if(e.getButton() == 3) {
-            model.mark();
+            try {
+                model.mark();
+            } catch (IOException ex) {
+                Logger.getLogger(CellController.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
     }
 
