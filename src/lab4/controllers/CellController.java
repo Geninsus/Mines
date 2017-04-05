@@ -21,7 +21,7 @@ import lab4.views.GraphicalCellView;
 public class CellController extends MouseAdapter {
     
     private final GridController gridController;
-    private final Cell model;
+    public final Cell model;
     private final GraphicalCellView view;
     
     public CellController(GridController gridController,Cell model){
@@ -35,27 +35,34 @@ public class CellController extends MouseAdapter {
     @Override
     public void mouseClicked(MouseEvent e){
         /* Clique gauche */
-        if(e.getButton() == 1 && model.isUnveil() == false) {
-            model.setUnveil(true);
-            gridController.game.model.incRound();
-            if(gridController.game.model.getRound() == 1) {
-                gridController.model.generateMines();
-            }
-            try {
-                model.unveil();
-                
-                /* Clique droit */
-            } catch (NegativeNumberException | IOException ex) {
-                Logger.getLogger(CellController.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        } else if(e.getButton() == 3) {
-            try {
-                model.mark();
-            } catch (IOException ex) {
-                Logger.getLogger(CellController.class.getName()).log(Level.SEVERE, null, ex);
-            }
+        if(model.isUnveil() == false) {
+           if(e.getButton() == 1) {
+                model.setUnveil(true);
+                gridController.game.model.incRound();
+                if(gridController.game.model.getRound() == 1) {
+                    gridController.model.generateMines();
+                }
+                try {
+                    model.unveil();
+
+                    /* Clique droit */
+                } catch (NegativeNumberException | IOException ex) {
+                    Logger.getLogger(CellController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            } else if(e.getButton() == 3) {
+                try {
+                    model.mark();
+                } catch (IOException ex) {
+                    Logger.getLogger(CellController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            } 
         }
     }
 
-
+    /**
+     * @return the view
+     */
+    public GraphicalCellView getView() {
+        return view;
+    }
 }

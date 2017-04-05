@@ -28,6 +28,7 @@ public class GameController {
     
     public GraphicalGameView view;
     public Game model;
+    public GridController gridController;
     
     public static GameController create(Game game) {
         GameController gameController = new GameController(game);
@@ -62,7 +63,7 @@ public class GameController {
         }
         
         /* Création du controller Grid */
-        GridController gridController = new GridController(this, gridModel);
+        this.gridController = new GridController(this, gridModel);
     }
     
     public void init() {

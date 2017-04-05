@@ -5,6 +5,7 @@
  */
 package lab4.models;
 
+import java.sql.Timestamp;
 import java.util.Observable;
 
 /**
@@ -15,12 +16,13 @@ public class Timer extends Observable {
     
     java.util.Timer timer;
     private int counter;
+    private long time;
     
     private class TimerTask extends java.util.TimerTask {
 
         @Override
         public void run() {
-            counter++;
+            counter = (int) ((System.currentTimeMillis() - time) / 1000);
             setChanged();
             notifyObservers();
         }        
@@ -32,7 +34,8 @@ public class Timer extends Observable {
     
     public void start() {
        counter = 0;
-       this.timer.schedule(new TimerTask(), 1000, 1000);
+       time = System.currentTimeMillis(); 
+       this.timer.schedule(new TimerTask(), 100, 100);
     }
     
     public void stop() {

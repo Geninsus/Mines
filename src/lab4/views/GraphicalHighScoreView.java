@@ -6,6 +6,8 @@
 package lab4.views;
 
 import java.awt.GridLayout;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import javax.swing.JLabel;
@@ -44,27 +46,44 @@ public class GraphicalHighScoreView  extends JPanel {
             }
         }
         
-        this.add(new JLabel("BEGINER"));
-        this.add(new JLabel("INTERMEDIAIRE"));
-        this.add(new JLabel("EXPERT"));
+        JLabel label;
+        label = new JLabel("BEGINER");
+        this.add(label);
+        label.setHorizontalAlignment(JLabel.CENTER);
+        label = new JLabel("INTERMEDIAIRE");
+        this.add(label);
+        label.setHorizontalAlignment(JLabel.CENTER);
+        label = new JLabel("EXPERT");
+        this.add(label);
+        label.setHorizontalAlignment(JLabel.CENTER);
        
         for(int i = 0; i < MAX_SCORES_DISPLAY; i++) {
             if(beginerScores.size() > i) {
-               this.add(new JLabel(String.valueOf(beginerScores.get(i).getScore()) + " sec")); 
+                DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+                String dateStr = formatter.format(beginerScores.get(i).getDate());
+                label = new JLabel(String.valueOf(beginerScores.get(i).getScore()) + " sec - " + dateStr);
+                label.setHorizontalAlignment(JLabel.CENTER);
+               this.add(label); 
             } else {
-                this.add(new JLabel("")); 
+                label = new JLabel("");
+                this.add(label); 
             }
             
             if(IntermediaireScores.size() > i) {
-               this.add(new JLabel(String.valueOf(IntermediaireScores.get(i).getScore()) + " sec")); 
+                label = new JLabel(String.valueOf(IntermediaireScores.get(i).getScore()) + " sec");
+                label.setHorizontalAlignment(JLabel.CENTER);
+               this.add(label); 
             } else {
                 this.add(new JLabel("")); 
             }
             
             if(expertScores.size() > i) {
-               this.add(new JLabel(String.valueOf(expertScores.get(i).getScore()) + " sec")); 
+                label = new JLabel(String.valueOf(expertScores.get(i).getScore()) + " sec");
+                label.setHorizontalAlignment(JLabel.CENTER);
+               this.add(label); 
             } else {
-                this.add(new JLabel("")); 
+                label = new JLabel("");
+                this.add(label); 
             }
         }
         
