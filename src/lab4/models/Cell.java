@@ -68,12 +68,16 @@ public class Cell extends Observable {
     public void mark() throws IOException {
         switch (marking) {
             case 'u':
-                marking = 'f';
-                game.decRemainingMines();
-                break;
+                if(game.getRemainingMines() != 0) {
+                    marking = 'f';
+                    game.decRemainingMines();
+                    break;
+                }
             case 'f':
+                if(marking == 'f') {
+                   game.incRemainingMines(); 
+                }
                 marking = '?';
-                game.incRemainingMines();
                 break;
             case '?':
                 marking = 'u';
