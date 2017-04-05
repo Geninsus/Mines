@@ -73,7 +73,6 @@ public class CustomGameController implements Observable,ActionListener,MouseList
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        System.err.println("ok");
         if(e.getSource().getClass() == JRadioButton.class){
             JRadioButton button = (JRadioButton)e.getSource();
             switch(button.getName()){
