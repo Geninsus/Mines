@@ -73,6 +73,7 @@ public class CustomGameController implements Observable,ActionListener,MouseList
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        System.err.println("ok");
         if(e.getSource().getClass() == JRadioButton.class){
             JRadioButton button = (JRadioButton)e.getSource();
             switch(button.getName()){
@@ -117,9 +118,11 @@ public class CustomGameController implements Observable,ActionListener,MouseList
                     this.customGameView.getSliderMines().setValue(this.customGameView.getJinputMines());
                     break;
                 case "jinputRow":
+                    this.customGameView.updateMines();
                     this.customGameView.getSliderRows().setValue(this.customGameView.getJinputRow());
                     break;
                 case "jinputColumn":
+                    this.customGameView.updateMines();
                     this.customGameView.getSliderColumns().setValue(this.customGameView.getJinputColumn());
                     break;
                 default:
@@ -143,9 +146,11 @@ public class CustomGameController implements Observable,ActionListener,MouseList
         JSlider slider = (JSlider) me.getSource();
         switch(slider.getName()){
             case "sliderRows":
+                this.customGameView.updateMines();
                 this.customGameView.setJinputRow(this.customGameView.getSliderRows().getValue());
                 break;
             case "sliderColumns":
+                this.customGameView.updateMines();
                 this.customGameView.setJinputColumn(this.customGameView.getSliderColumns().getValue());
                 break;
             case "sliderMines":
@@ -155,7 +160,6 @@ public class CustomGameController implements Observable,ActionListener,MouseList
                 break;
         }
     }
-
     @Override
     public void mouseEntered(MouseEvent me) {
         

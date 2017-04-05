@@ -7,8 +7,10 @@ package lab4.views;
 
 import java.awt.BorderLayout;
 import java.awt.Component;
+import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.text.ParseException;
 import java.util.Observable;
 import java.util.Observer;
@@ -99,17 +101,24 @@ public class GraphicalCustomGameView extends JPanel implements Observer{
           /* Input texteFields */
           this.sliderPanel = new JPanel(new GridLayout(3,3,0,0));
           sliderPanel.setName("sliderPanel");
+          
+          NumberFormat numberFormat = NumberFormat.getNumberInstance();
+          numberFormat.setMaximumIntegerDigits(3);
+          numberFormat.setMinimumIntegerDigits(1);
 
-          this.jinputRow = new JFormattedTextField(new DecimalFormat("##"));
+          this.jinputRow = new JFormattedTextField(numberFormat);
           this.jinputRow.setName("jinputRow");
+          this.jinputRow.setValue(Game.MINIMUMROWS);
           this.jinputRow.addActionListener(customGameController);
 
-          this.jinputColumn = new JFormattedTextField(new DecimalFormat("##"));
+          this.jinputColumn = new JFormattedTextField(numberFormat);
           this.jinputColumn.setName("jinputColumn");
+          this.jinputColumn.setValue(19);
           this.jinputColumn.addActionListener(customGameController);
 
-          this.jinputMines = new JFormattedTextField(new DecimalFormat("##"));
+          this.jinputMines = new JFormattedTextField(numberFormat);
           this.jinputMines.setName("jinputMines");
+          this.jinputMines.setValue(76);
           this.jinputMines.addActionListener(customGameController);
 
 
@@ -220,8 +229,10 @@ public class GraphicalCustomGameView extends JPanel implements Observer{
         
         /* Checking if the input value is not out of range */
         if (num.intValue() <= Game.MINIMUMROWS) {
+            this.jinputRow.setValue(Game.MINIMUMROWS);
             return Game.MINIMUMROWS;
         }else if(num.intValue() >= Game.MAXIMUMROWS){
+            this.jinputRow.setValue(Game.MAXIMUMROWS);
             return Game.MAXIMUMROWS;
         }else{
             return num.intValue();
@@ -232,12 +243,14 @@ public class GraphicalCustomGameView extends JPanel implements Observer{
      * @return the jinputColumn
      */
     public int getJinputColumn() {
-        Number num = (Number)this.jinputColumn.getValue();
         
+        Number num = (Number)this.jinputColumn.getValue();
         /* Checking if the input value is not out of range */
         if (num.intValue() <= Game.MINIMUMCOLUMNS) {
+            this.jinputColumn.setValue(Game.MINIMUMCOLUMNS);
             return Game.MINIMUMCOLUMNS;
         }else if(num.intValue() >= Game.MAXIMUMCOLUMNS){
+            this.jinputColumn.setValue(Game.MAXIMUMCOLUMNS);
             return Game.MAXIMUMCOLUMNS;
         }else{
             return num.intValue();
@@ -248,9 +261,13 @@ public class GraphicalCustomGameView extends JPanel implements Observer{
      * @return the jinputMines
      */
     public int getJinputMines() {
-                
         Number num = (Number)this.jinputMines.getValue();
         
+        if(num.intValue()>139){
+            this.jinputMines.setValue(139);
+        }else if(num.intValue() < 9){
+            this.jinputMines.setValue(9);
+        }
         return num.intValue();
     }
 
@@ -297,6 +314,12 @@ public class GraphicalCustomGameView extends JPanel implements Observer{
      */
     public void setSliderRows(JSlider sliderRows) {
         this.sliderRows = sliderRows;
+    }
+    
+    public void updateMines(){
+        this.sliderMines.setMaximum( (int) (this.sliderColumns.getValue()*this.sliderRows.getValue()*0.85) );
+        this.sliderMines.setLabelTable(null);
+        this.sliderMines.setMajorTickSpacing((int)(this.sliderMines.getMaximum() - this.sliderMines.getMinimum())/5);
     }
     
     /* Override methods */
