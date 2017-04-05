@@ -60,7 +60,7 @@ public class HighScoreController {
     
     private void initHighScoreFrame() {
         this.frame = new JFrame("High scores");
-        this.frame.setSize(400, 400);
+        this.frame.setSize(700, 500);
         this.frame.setVisible(true);
         this.frame.setLayout(new BorderLayout(5, 5));
     }

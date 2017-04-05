@@ -42,4 +42,11 @@ public class Score implements Serializable{
     public Difficulty getDifficulty() {
         return difficulty;
     }
+
+    /**
+     * @return the date
+     */
+    public Date getDate() {
+        return date;
+    }
 }
