@@ -18,7 +18,7 @@ import lab4.views.GraphicalGridView;
 public final class GridController {
     
     public GameController game;
-    private final ArrayList<ArrayList<CellController>> cellsController = new ArrayList<>();
+    public final ArrayList<ArrayList<CellController>> cellsController = new ArrayList<>();
     public Grid model;
     private final GraphicalGridView view;
     

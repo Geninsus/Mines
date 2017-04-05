@@ -21,7 +21,7 @@ import lab4.views.GraphicalCellView;
 public class CellController extends MouseAdapter {
     
     private final GridController gridController;
-    private final Cell model;
+    public final Cell model;
     private final GraphicalCellView view;
     
     public CellController(GridController gridController,Cell model){
@@ -57,5 +57,12 @@ public class CellController extends MouseAdapter {
                 }
             } 
         }
+    }
+
+    /**
+     * @return the view
+     */
+    public GraphicalCellView getView() {
+        return view;
     }
 }

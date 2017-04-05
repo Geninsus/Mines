@@ -9,9 +9,11 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
+import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
 import javax.swing.JOptionPane;
+import lab4.controllers.CellController;
 import lab4.controllers.GameController;
 import lab4.exceptions.NegativeNumberException;
 import lab4.fileManager.AppendingObjectOutputStream;
@@ -66,8 +68,18 @@ public class Game extends Observable implements Observer{
         controller.model.difficulty = Difficulty.BEGINER;
     }
     
-    public void lost() {
+    public void lost() throws NegativeNumberException, IOException {
         timer.stop();
+        
+        for (ArrayList<CellController> cellControllers: this.controller.gridController.cellsController) {
+            for (CellController cellController : cellControllers) {
+                if(cellController.model.isMine()) {
+                  cellController.getView().setText("X");  
+                }
+            }
+        }
+        
+        
         JOptionPane.showMessageDialog( controller.view, "PERDU :'(", "Démineur", JOptionPane.PLAIN_MESSAGE);
         controller.view.dispose();
         controller = GameController.create(new Game(9, 9, 10));
