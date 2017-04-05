@@ -51,6 +51,8 @@ public class GraphicalCellView extends JButton implements Observer {
                 this.setText("X"); 
             } else if(cell.getNumberOfAdjacentMines() > 0) {
                this.setText(Integer.toString(cell.getNumberOfAdjacentMines())); 
+            } else {
+                this.setText(""); 
             }
         } else {
             switch (cell.getMarking()) {

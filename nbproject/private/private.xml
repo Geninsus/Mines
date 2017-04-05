@@ -2,25 +2,20 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-<<<<<<< HEAD
-        <group/>
-=======
         <group>
-<<<<<<< HEAD
-            <file>file:/Users/fabien/Documents/Java/tp/lab4/src/lab4/views/GraphicalCellView.java</file>
-=======
-<<<<<<< HEAD
-            <file>file:/C:/Users/Guillaume/Documents/Boulot/Mines/src/lab4/controllers/CustomGameController.java</file>
-            <file>file:/C:/Users/Guillaume/Documents/Boulot/Mines/src/lab4/views/GraphicalCustomGameView.java</file>
-=======
+            <file>file:/Users/fabien/Documents/Java/tp/lab4/src/lab4/Lab4.java</file>
+            <file>file:/Users/fabien/Documents/Java/tp/lab4/src/lab4/views/GraphicalHighScoreView.java</file>
+            <file>file:/Users/fabien/Documents/Java/tp/lab4/src/lab4/models/Difficulty.java</file>
+            <file>file:/Users/fabien/Documents/Java/tp/lab4/src/lab4/views/GraphicalCustomGameView.java</file>
+            <file>file:/Users/fabien/Documents/Java/tp/lab4/src/lab4/controllers/CellController.java</file>
+            <file>file:/Users/fabien/Documents/Java/tp/lab4/src/lab4/controllers/CustomGameController.java</file>
+            <file>file:/Users/fabien/Documents/Java/tp/lab4/src/lab4/views/GraphicalMenuView.java</file>
             <file>file:/Users/fabien/Documents/Java/tp/lab4/src/lab4/models/Game.java</file>
             <file>file:/Users/fabien/Documents/Java/tp/lab4/src/lab4/controllers/GameController.java</file>
             <file>file:/Users/fabien/Documents/Java/tp/lab4/src/lab4/controllers/MenuController.java</file>
-            <file>file:/Users/fabien/Documents/Java/tp/lab4/src/lab4/views/GridView.java</file>
-            <file>file:/Users/fabien/Documents/Java/tp/lab4/src/lab4/controllers/GridController.java</file>
->>>>>>> 519f1afcfcaa77a4912d6376b574b9e519f514d3
->>>>>>> 95b7720d30a18055f9afbc8fde82cb86b44d7d52
+            <file>file:/Users/fabien/Documents/Java/tp/lab4/src/lab4/views/GraphicalGameView.java</file>
+            <file>file:/Users/fabien/Documents/Java/tp/lab4/src/lab4/models/Score.java</file>
+            <file>file:/Users/fabien/Documents/Java/tp/lab4/src/lab4/controllers/HighScoreController.java</file>
         </group>
->>>>>>> 56fe007abade89b83ea67f27c9f99a3749cc5f2b
     </open-files>
 </project-private>
