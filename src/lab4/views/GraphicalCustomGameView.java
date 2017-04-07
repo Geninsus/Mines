@@ -6,9 +6,13 @@
 package lab4.views;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
 import java.awt.GridLayout;
+import java.awt.Insets;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.text.ParseException;
@@ -60,7 +64,7 @@ public class GraphicalCustomGameView extends JPanel implements Observer{
          /* Radio Button Beginner */
          JRadioButton beginnerRadio = new JRadioButton("Beginner : 10 mines in a 9 x 9 field");
          beginnerRadio.setName("beginner");
-         beginnerRadio.setAlignmentX(Component.LEFT_ALIGNMENT);
+         beginnerRadio.setAlignmentX(Component.CENTER_ALIGNMENT);
          beginnerRadio.addActionListener(customGameController);
          radioGroup.add(beginnerRadio);
          panelRadio.add(beginnerRadio);
@@ -68,7 +72,7 @@ public class GraphicalCustomGameView extends JPanel implements Observer{
          /* Radio Button Intermediaire */
          JRadioButton intermediaireRadio = new JRadioButton("Intermediaire : 40 mines in a 16 x 16 field");
          intermediaireRadio.setName("intermediaire");
-         intermediaireRadio.setAlignmentX(Component.LEFT_ALIGNMENT);
+         intermediaireRadio.setAlignmentX(Component.CENTER_ALIGNMENT);
          intermediaireRadio.addActionListener(customGameController);
          radioGroup.add(intermediaireRadio);
          panelRadio.add(intermediaireRadio);
@@ -76,7 +80,7 @@ public class GraphicalCustomGameView extends JPanel implements Observer{
          /* Radio Button Expert */
          JRadioButton expertRadio = new JRadioButton("Expert : 90 mines in a 16 x 30 field");
          expertRadio.setName("expert");
-         expertRadio.setAlignmentX(Component.LEFT_ALIGNMENT);
+         expertRadio.setAlignmentX(Component.CENTER_ALIGNMENT);
          expertRadio.addActionListener(customGameController);
          radioGroup.add(expertRadio);
          panelRadio.add(expertRadio);
@@ -84,7 +88,7 @@ public class GraphicalCustomGameView extends JPanel implements Observer{
          /* Radio Button Custom */
          this.customRadio = new JRadioButton("Custom");
          customRadio.setName("custom");
-         customRadio.setAlignmentX(Component.LEFT_ALIGNMENT);
+         customRadio.setAlignmentX(Component.CENTER_ALIGNMENT);
          customRadio.addActionListener(customGameController);
          radioGroup.add(customRadio);
          panelRadio.add(customRadio);
@@ -99,7 +103,12 @@ public class GraphicalCustomGameView extends JPanel implements Observer{
         /* Sliders Panel */
 
           /* Input texteFields */
-          this.sliderPanel = new JPanel(new GridLayout(3,3,0,0));
+          this.sliderPanel = new JPanel(new GridBagLayout());
+          
+          GridBagConstraints gbc = new GridBagConstraints();
+          /* Set padding between components */
+          gbc.insets = new Insets(10, 10, 10, 10);
+          
           sliderPanel.setName("sliderPanel");
           
           NumberFormat numberFormat = NumberFormat.getNumberInstance();
@@ -109,16 +118,19 @@ public class GraphicalCustomGameView extends JPanel implements Observer{
           this.jinputRow = new JFormattedTextField(numberFormat);
           this.jinputRow.setName("jinputRow");
           this.jinputRow.setValue(Game.MINIMUMROWS);
+          this.jinputRow.setPreferredSize(new Dimension(40,20));
           this.jinputRow.addActionListener(customGameController);
 
           this.jinputColumn = new JFormattedTextField(numberFormat);
           this.jinputColumn.setName("jinputColumn");
           this.jinputColumn.setValue(19);
+          this.jinputColumn.setPreferredSize(new Dimension(40,20));
           this.jinputColumn.addActionListener(customGameController);
 
           this.jinputMines = new JFormattedTextField(numberFormat);
           this.jinputMines.setName("jinputMines");
           this.jinputMines.setValue(76);
+          this.jinputMines.setPreferredSize(new Dimension(40,20));
           this.jinputMines.addActionListener(customGameController);
 
 
@@ -152,23 +164,36 @@ public class GraphicalCustomGameView extends JPanel implements Observer{
           JLabel labelText = new JLabel("Rows");
           labelText.setHorizontalAlignment(SwingConstants.CENTER);
 
-          sliderPanel.add(labelText);
-          sliderPanel.add(this.sliderRows);
-          sliderPanel.add(this.jinputRow);
+          
+          gbc.gridx = 0;
+          gbc.gridy = 0;
+          sliderPanel.add(labelText,gbc);
+          gbc.gridx++;
+          sliderPanel.add(this.sliderRows,gbc);
+          gbc.gridx++;
+          sliderPanel.add(this.jinputRow,gbc);
 
           labelText = new JLabel("Columns");
           labelText.setHorizontalAlignment(SwingConstants.CENTER);
-
-          sliderPanel.add(labelText);
-          sliderPanel.add(this.sliderColumns);
-          sliderPanel.add(this.jinputColumn);
+          
+          gbc.gridy++;
+          gbc.gridx = 0;
+          sliderPanel.add(labelText,gbc);
+          gbc.gridx++;
+          sliderPanel.add(this.sliderColumns,gbc);
+          gbc.gridx++;
+          sliderPanel.add(this.jinputColumn,gbc);
 
           labelText = new JLabel("Mines");
           labelText.setHorizontalAlignment(SwingConstants.CENTER);
 
-          sliderPanel.add(labelText);
-          sliderPanel.add(this.sliderMines);
-          sliderPanel.add(this.jinputMines);
+          gbc.gridy++;
+          gbc.gridx = 0;
+          sliderPanel.add(labelText,gbc);
+          gbc.gridx++;
+          sliderPanel.add(this.sliderMines,gbc);
+          gbc.gridx++;
+          sliderPanel.add(this.jinputMines,gbc);
 
           /* Add to global panel at CENTER position */
           this.add(sliderPanel,BorderLayout.CENTER);

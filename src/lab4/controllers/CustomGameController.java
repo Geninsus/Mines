@@ -49,6 +49,7 @@ public class CustomGameController implements Observable,ActionListener,MouseList
     private void initCustomGameFrame() {
         this.customFrame = new JFrame("Custom Game");
         this.customFrame.setSize(400, 400);
+        this.customFrame.setResizable(false);
         this.customFrame.setVisible(true);
         this.customFrame.setLayout(new BorderLayout(5, 5));
     }
